@@ -70,3 +70,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.full-screen-section {
+  min-height: calc(100dvh - 80px);
+}
