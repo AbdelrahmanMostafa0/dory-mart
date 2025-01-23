@@ -18,6 +18,14 @@ export const getSingleProduct = async ({ id }) => {
     throw e.response.data;
   }
 };
+export const getAllCategories = async ({ category }) => {
+  try {
+    const response = await axiosInstance.get(`/products/categories`);
+    return response.data;
+  } catch (e) {
+    throw e.response.data;
+  }
+};
 export const getProductsByCategory = async ({ category }) => {
   try {
     const response = await axiosInstance.get(`/products/category/${category}`);

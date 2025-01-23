@@ -39,7 +39,7 @@ const HeroSection = () => {
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="text-white text-9xl font-semibold font-zentry">
+            <h1 className="text-white text-9xl font-semibold font-zentry lg:text-[200px]">
               Just keep
             </h1>
           </div>
@@ -54,11 +54,11 @@ const HeroSection = () => {
           like no other. Let’s explore together!
         </p>
       </div> */}
-        <h1 className=" absolute bottom-5 right-5  z-10  text-white text-8xl font-semibold font-zentry">
+        <h1 className=" absolute bottom-5 right-5  z-10  text-white text-8xl font-semibold font-zentry lg:text-[150px]">
           shopping
         </h1>
       </div>
-      <h1 className=" absolute bottom-5 right-5   text-black text-8xl font-semibold font-zentry">
+      <h1 className=" absolute bottom-5 right-5   text-black text-8xl font-semibold font-zentry lg:text-[150px]">
         shopping
       </h1>
     </div>
