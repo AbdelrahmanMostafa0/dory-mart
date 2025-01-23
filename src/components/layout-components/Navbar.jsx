@@ -119,7 +119,7 @@ const Navbar = () => {
                 <SheetTitle className="text-lg font-bold text-start">
                   Menu
                 </SheetTitle>
-                <div className="size-full bg-yellow-100 max-h-[88dvh] overflow-y-auto">
+                <div className="size-full bg-yellow-100 max-h-[83dvh] overflow-y-auto">
                   <div className="h-dvh"></div>
                 </div>
                 <div className="flex items-center justify-center">
