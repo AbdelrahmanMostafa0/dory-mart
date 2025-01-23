@@ -9,6 +9,7 @@ export default async function Home() {
   return (
     <div>
       <HeroSection />
+      <div className="h-dvh"></div>
     </div>
   );
 }
