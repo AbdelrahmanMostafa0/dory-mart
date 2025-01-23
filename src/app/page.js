@@ -4,8 +4,8 @@ import HeroSection from "@/components/home-page/HeroSection";
 import Image from "next/image";
 
 export default async function Home() {
-  const response = await getAllProducts();
-  console.log(response);
+  // const response = await getAllProducts();
+  // console.log(response);
   return (
     <div>
       <HeroSection />
