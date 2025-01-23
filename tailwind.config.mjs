@@ -7,6 +7,9 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      padding: "10px",
+    },
     extend: {
       fontFamily: {
         zentry: ["zentry", "sans-serif"],

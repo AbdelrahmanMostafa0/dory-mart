@@ -5,6 +5,7 @@
 body {
   font-family: "robert-medium", sans-serif;
   cursor: url("/cursor.png"), default;
+  overflow-x: hidden;
 }
 
 @layer base {
@@ -101,6 +102,14 @@ body {
   }
   .indicator-line {
     @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 .indicator-line.active {

@@ -44,16 +44,6 @@ const HeroSection = () => {
             </h1>
           </div>
         </div>
-        {/* <div className="z-10 w-full h-full full-screen-section container flex justify-center flex-col mx-auto gap-6">
-        <p className="md:w-6/12 text-white text-xl leading-8">
-          🎉 Welcome to Dormart – Your ultimate destination for everything you
-          love! Inspired by Dory’s adventurous spirit, Dormart makes shopping as
-          fun as an ocean adventure. 🐟 With endless options and unbeatable
-          deals, we make it easy to “Just Keep Shopping!” 🌊 Dive into a sea of
-          exciting products and enjoy a smooth, delightful shopping experience
-          like no other. Let’s explore together!
-        </p>
-      </div> */}
         <h1 className=" absolute bottom-5 right-5  z-10  text-white text-8xl font-semibold font-zentry lg:text-[150px]">
           shopping
         </h1>
