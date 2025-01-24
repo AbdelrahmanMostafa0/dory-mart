@@ -26,9 +26,13 @@ export const getAllCategories = async ({ category }) => {
     throw e.response.data;
   }
 };
-export const getProductsByCategory = async ({ category }) => {
+export const getProductsByCategory = async ({ category, page = 1 }) => {
+  console.log(`/products/category/${category}?limit=15&skip=${page - 1 * 15}`);
+
   try {
-    const response = await axiosInstance.get(`/products/category/${category}`);
+    const response = await axiosInstance.get(
+      `/products/category/${category}?limit=15&skip=${(page - 1) * 15}`
+    );
     return response.data;
   } catch (e) {
     throw e.response.data;
