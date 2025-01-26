@@ -5,7 +5,7 @@
 body {
   font-family: "robert-medium", sans-serif;
   cursor: url("/cursor.png"), default;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 @layer base {

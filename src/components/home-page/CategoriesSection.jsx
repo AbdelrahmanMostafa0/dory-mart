@@ -26,7 +26,7 @@ const CategoriesSection = () => {
     }
   };
   return (
-    <section className="min-h-dvh h-full w-full py-24   px-2 mx-auto ">
+    <section className="min-h-dvh h-full w-full py-16 sm:py-24   px-2 mx-auto ">
       {" "}
       <div className="container mx-auto space-y-8">
         <h2 className="text-5xl md:text-7xl font-bold font-zentry sm:text-start">

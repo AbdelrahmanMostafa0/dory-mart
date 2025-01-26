@@ -1,7 +1,9 @@
 import { axiosInstance } from "@/apis/axiosInstance";
 import { getAllProducts } from "@/apis/productsApis";
 import CategoriesSection from "@/components/home-page/CategoriesSection";
+import ExploreMore from "@/components/home-page/ExploreMore";
 import HeroSection from "@/components/home-page/HeroSection";
+import { Button } from "@/components/ui/button";
 import Head from "next/head";
 import Image from "next/image";
 export const metadata = {
@@ -18,6 +20,7 @@ export default async function Home() {
       </Head>
       <HeroSection />
       <CategoriesSection />
+      <ExploreMore />
     </div>
   );
 }

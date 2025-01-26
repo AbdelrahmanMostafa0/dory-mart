@@ -1,9 +1,9 @@
 import { axiosInstance } from "./axiosInstance";
 
-export const getAllProducts = async ({ skip = 0, limit = 16 } = {}) => {
+export const getAllProducts = async ({ page = 1, limit = 15 } = {}) => {
   try {
     const response = await axiosInstance.get(
-      `/products?limit=${limit}&skip=${skip}`
+      `/products?limit=${limit}&skip=${(page - 1) * limit}`
     );
     return response.data;
   } catch (e) {
