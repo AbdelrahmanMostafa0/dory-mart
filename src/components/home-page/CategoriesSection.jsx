@@ -5,6 +5,8 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import CategoryCard from "./elements/CategoryCard";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const CategoriesSection = () => {
   const sliderRef = useRef(null);
@@ -25,6 +27,34 @@ const CategoriesSection = () => {
       });
     }
   };
+  const categories = [
+    { title: "Shoes", src: "/shoes-2.jpg", slug: "mens-shoes" },
+    { title: "Laptops", src: "/laptop.jpg", slug: "laptops" },
+    { title: "Watches", src: "/watch-2.jpg", slug: "mens-watches" },
+    { title: "Sunglasses", src: "/sunglasses-1.jpg", slug: "sunglasses" },
+    { title: "Phones", src: "/phone.jpg", slug: "smartphones" },
+    { title: "Fragrances", src: "/fragrances-1.jpg", slug: "fragrances" },
+  ];
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ".cat-card",
+        { opacity: 0 }, // Initial state: hidden and slightly below
+        {
+          opacity: 1,
+          y: 0, // Final state: fully visible and in place
+          stagger: 0.3,
+          ease: "power1.inOut",
+          duration: 1,
+          scrollTrigger: {
+            trigger: sliderRef.current, // Use the slider as the triggerx
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    },
+    { scope: sliderRef }
+  );
   return (
     <section className="min-h-dvh h-full w-full py-16 sm:py-24   px-2 mx-auto ">
       {" "}
@@ -36,36 +66,16 @@ const CategoriesSection = () => {
           ref={sliderRef}
           className="w-[94dvw] mx-auto flex gap-4 no-scrollbar overflow-x-scroll pr-9 sm:pr-52 2xl:pr-96"
         >
-          <CategoryCard
-            title={"Shoes"}
-            src={"/shoes-2.jpg"}
-            slug={"mens-shoes"}
-          />
-          <CategoryCard
-            title={"Laptops"}
-            src={"/laptop.jpg"}
-            slug={"laptops"}
-          />
-          <CategoryCard
-            title={"Watches"}
-            src={"/watch-2.jpg"}
-            slug={"mens-watches"}
-          />
-          <CategoryCard
-            title={"Sunglasses"}
-            src={"/sunglasses-1.jpg"}
-            slug={"sunglasses"}
-          />
-          <CategoryCard
-            title={"Phones"}
-            src={"/phone.jpg"}
-            slug={"smartphones"}
-          />
-          <CategoryCard
-            title={"Fragrances"}
-            src={"/fragrances-1.jpg"}
-            slug={"fragrances"}
-          />
+          {categories.map((category, index) => {
+            return (
+              <CategoryCard
+                key={index}
+                title={category.title}
+                src={category.src}
+                slug={category.slug}
+              />
+            );
+          })}
         </div>
         <div className="relative flex items-center justify-end w-full gap-4 ">
           {/* Left Scroll Button */}

@@ -12,6 +12,7 @@ export default {
     },
     extend: {
       fontFamily: {
+        "lilita-one": ["Lilita One", "sans-serif"],
         zentry: ["zentry", "sans-serif"],
         general: ["general", "sans-serif"],
         "circular-web": ["circular-web", "sans-serif"],

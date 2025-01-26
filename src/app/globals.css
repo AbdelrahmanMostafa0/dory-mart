@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -98,7 +99,7 @@ body {
 }
 @layer utilities {
   .floating-nav {
-    @apply !bg-black !rounded-lg !border;
+    @apply !bg-[#01599e] !rounded-lg !border;
   }
   .indicator-line {
     @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
@@ -110,6 +111,12 @@ body {
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  .animated-word {
+    /* @apply special-font font-zentry font-black opacity-0; */
+    transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
+    transform-origin: 50% 50% -150px !important;
+    will-change: opacity, transform;
   }
 }
 .indicator-line.active {

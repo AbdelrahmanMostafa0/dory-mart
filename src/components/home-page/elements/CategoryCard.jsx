@@ -6,7 +6,7 @@ const CategoryCard = ({ src, title, slug }) => {
   return (
     <Link
       href={`/categories/${slug}`}
-      className="h-[62dvh] min-h-[300px] sm:h-[70dvh] min-w-[90vw] sm:min-w-96 md:min-w-[420px] bg-blue-300 rounded-3xl relative overflow-hidden group"
+      className="h-[62dvh] opacity-0 min-h-[300px] sm:h-[70dvh] min-w-[90vw] sm:min-w-96 md:min-w-[420px] bg-blue-300 rounded-3xl relative overflow-hidden group cat-card"
     >
       {src && (
         <Image

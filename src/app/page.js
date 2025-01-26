@@ -20,7 +20,7 @@ export default async function Home() {
       </Head>
       <HeroSection />
       <CategoriesSection />
-      <ExploreMore />
+      {/* <ExploreMore /> */}
     </div>
   );
 }

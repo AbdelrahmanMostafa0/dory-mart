@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "@/store/features/categoriesListSlice";
 import NavSideMenu from "./nav-side-menu/NavSideMenu";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 const Navbar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [lastScrollY, setLastscrollY] = useState(0);
@@ -36,19 +38,24 @@ const Navbar = () => {
   }, [isAudioPlaying]);
 
   const { y: currentScrollY } = useWindowScroll();
+  const router = useRouter();
+  const isHome = router.pathname === "/";
+
   useEffect(() => {
-    if (currentScrollY === 0) {
-      setIsNavVisible(true);
-      navContainerRef.current.classList.remove("floating-nav");
-    } else if (currentScrollY > lastScrollY) {
-      setIsNavVisible(false);
-      navContainerRef.current.classList.add("floating-nav");
-    } else if (currentScrollY < lastScrollY) {
-      setIsNavVisible(true);
-      navContainerRef.current.classList.add("floating-nav");
+    if (isHome) {
+      if (currentScrollY === 0) {
+        setIsNavVisible(true);
+        navContainerRef.current.classList.remove("floating-nav");
+      } else if (currentScrollY > lastScrollY) {
+        setIsNavVisible(false);
+        navContainerRef.current.classList.add("floating-nav");
+      } else if (currentScrollY < lastScrollY) {
+        setIsNavVisible(true);
+        navContainerRef.current.classList.add("floating-nav");
+      }
+      setLastscrollY(currentScrollY);
     }
-    setLastscrollY(currentScrollY);
-  }, [currentScrollY, lastScrollY]);
+  }, [currentScrollY, lastScrollY, router]);
   useEffect(() => {
     gsap.to(navContainerRef.current, {
       y: isNavVisible ? 0 : -100,
@@ -59,24 +66,24 @@ const Navbar = () => {
   return (
     <nav
       ref={navContainerRef}
-      className=" fixed    inset-x-2 top-4 z-50 border-none transition-all duration-700 sm:inset-x-6 bg-black/20 rounded-lg"
+      className=" fixed    inset-x-2 top-4 z-50 border-none transition-all duration-700 sm:inset-x-6 bg-[#01599e] rounded-lg"
     >
       <div className="w-full h-16   px-6 mx-auto flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Link
             href={"/"}
-            className="text-2xl uppercase font-extrabold font-robert-medium text-white"
+            className="text-2xl flex items-center gap-1 tracking-widest capitalize lete font-lilita-one text-white -ml-3 sm:-ml-0"
           >
-            DoryMart
+            <Image src="/dory-logo.png" width={40} height={40} alt="logo" cla />
+            Dorymart
           </Link>
         </div>
-        <div className="sm:flex hidden">hi</div>
         <div className="flex items-center gap-4">
           <div className="hidden sm:flex gap-4 text-white">
-            <button className="flex items-center gap-2">
+            {/* <button className="flex items-center gap-2">
               <MdLanguage />
               <span>عربى</span>
-            </button>
+            </button> */}
             <FaHeart className=" text-xl" />
             <FaCartShopping className=" text-xl" />
           </div>
