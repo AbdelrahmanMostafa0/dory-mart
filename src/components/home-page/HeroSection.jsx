@@ -22,6 +22,12 @@ const HeroSection = () => {
         scrub: true,
       },
     });
+    gsap.from(".hero-title", {
+      opacity: 0,
+      y: 50,
+      stagger: 0.3,
+      ease: "power1.inOut",
+    });
   });
   return (
     <div className="relative h-dvh  overflow-x-hidden">
@@ -39,12 +45,12 @@ const HeroSection = () => {
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="text-white text-9xl font-semibold font-zentry lg:text-[200px]">
+            <h1 className="text-white text-9xl font-semibold font-zentry lg:text-[200px] hero-title">
               Just keep
             </h1>
           </div>
         </div>
-        <h1 className=" absolute bottom-5 right-5  z-10  text-white text-8xl font-semibold font-zentry lg:text-[150px]">
+        <h1 className=" absolute bottom-5 right-5  z-10  text-white text-8xl font-semibold font-zentry lg:text-[150px] hero-title">
           shopping
         </h1>
       </div>
