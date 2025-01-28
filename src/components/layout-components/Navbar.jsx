@@ -65,8 +65,16 @@ const Navbar = () => {
   }, [isNavVisible]);
   return (
     <nav
+      style={{
+        background: "rgba(1, 89, 158, 0.55)",
+        borderRadius: "16px",
+        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+        backdropFilter: "blur(11.6px)",
+        WebkitBackdropFilter: "blur(11.6px)", // Note: camelCase for `-webkit-` prefix
+        border: "1px solid rgba(1, 89, 158, 0.09)",
+      }}
       ref={navContainerRef}
-      className=" fixed    inset-x-2 top-4 z-50 border-none transition-all duration-700 sm:inset-x-6 bg-[#01599e] rounded-lg"
+      className=" fixed    inset-x-2 top-4 z-50  transition-all duration-700 sm:inset-x-6  rounded-lg"
     >
       <div className="w-full h-16   px-6 mx-auto flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -74,7 +82,7 @@ const Navbar = () => {
             href={"/"}
             className="text-2xl flex items-center gap-1 tracking-widest capitalize lete font-lilita-one text-white -ml-3 sm:-ml-0"
           >
-            <Image src="/dory-logo.png" width={40} height={40} alt="logo" cla />
+            <Image src="/dory-logo.png" width={40} height={40} alt="logo" />
             Dorymart
           </Link>
         </div>

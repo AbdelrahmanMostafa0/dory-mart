@@ -39,7 +39,7 @@ const CategoriesSection = () => {
     () => {
       gsap.fromTo(
         ".cat-card",
-        { opacity: 0 }, // Initial state: hidden and slightly below
+        { opacity: 0, y: 50 }, // Initial state: hidden and slightly below
         {
           opacity: 1,
           y: 0, // Final state: fully visible and in place
