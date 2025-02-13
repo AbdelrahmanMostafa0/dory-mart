@@ -30,7 +30,7 @@ const HeroSection = () => {
     });
   });
   return (
-    <div className="relative h-lvh  overflow-x-hidden">
+    <div className="relative h-dvh  overflow-x-hidden">
       <div
         id="hero-img"
         className="relative z-10 h-dvh  rounded-lg overflow-hidden"
