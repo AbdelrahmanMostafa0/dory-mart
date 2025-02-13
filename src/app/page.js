@@ -22,7 +22,7 @@ export default async function Home() {
       <HeroSection />
       <CategoriesSection />
       <NewstProducts />
-      {/* <ExploreMore /> */}
+      <ExploreMore />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { store } from "@/store/store";
 import Head from "next/head";
 import { useEffect } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
+import Footer from "@/components/layout-components/Footer";
 // export const metadata = {
 //   title: "Dorymart",
 //   description: "Just keep shopping",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         <Provider store={store}>
           <Navbar />
           {children}
+          <Footer />
         </Provider>
       </body>
     </html>
