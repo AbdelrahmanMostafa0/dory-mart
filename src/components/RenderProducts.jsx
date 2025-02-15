@@ -1,10 +1,12 @@
 import ProductPagination from "@/app/categories/Pagination";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
+import PageContainer from "./ui/PageContainer";
+import Link from "next/link";
 
 const RenderProducts = ({ response, page, limit }) => {
   return (
-    <div className="min-h-dvh pt-24 mx-auto container px-2 mb-5 ">
+    <PageContainer>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-5 min-h-[80dvh]">
         {response?.products &&
           response?.products.map((prod) => {
@@ -15,13 +17,15 @@ const RenderProducts = ({ response, page, limit }) => {
                 key={prod.id}
                 className=" border h-fit overflow-hidden  rounded-lg max-w-[350px] w-full bg-white drop-shadow-md "
               >
-                <Image
-                  src={prod.thumbnail}
-                  width={300}
-                  height={300}
-                  alt={prod.title}
-                  className="object-cover border  w-full bg-gray-50"
-                />
+                <Link href={`/product-details/${prod.id}`}>
+                  <Image
+                    src={prod.thumbnail}
+                    width={300}
+                    height={300}
+                    alt={prod.title}
+                    className="object-cover border  w-full bg-gray-50"
+                  />
+                </Link>
                 <div className="p-2 px-4 space-y-2 text-lg">
                   <p className="line-clamp-1" title={prod.title}>
                     {prod.title}
@@ -52,7 +56,7 @@ const RenderProducts = ({ response, page, limit }) => {
         totalProducts={response.total}
         limit={limit}
       />
-    </div>
+    </PageContainer>
   );
 };
 export default RenderProducts;
