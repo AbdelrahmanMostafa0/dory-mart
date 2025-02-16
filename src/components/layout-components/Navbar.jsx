@@ -11,6 +11,7 @@ import NavSideMenu from "./nav-side-menu/NavSideMenu";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Searchbar from "./Searchbar";
 const Navbar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [lastScrollY, setLastscrollY] = useState(0);
@@ -86,6 +87,7 @@ const Navbar = () => {
             Dorymart
           </Link>
         </div>
+        <Searchbar />
         <div className="flex items-center gap-4">
           <div className="hidden sm:flex gap-4 text-white">
             {/* <button className="flex items-center gap-2">

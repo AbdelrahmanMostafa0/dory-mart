@@ -78,6 +78,10 @@ body {
   }
 
   @font-face {
+    font-family: "impact";
+    src: url("/fonts/impact.woff2") format("woff2");
+  }
+  @font-face {
     font-family: "general";
     src: url("/fonts/general.woff2") format("woff2");
   }
