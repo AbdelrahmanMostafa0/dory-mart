@@ -22,7 +22,7 @@ export const getSingleProduct = async ({ id }) => {
     throw e.response.data;
   }
 };
-export const getAllCategories = async ({ category }) => {
+export const getAllCategories = async () => {
   try {
     const response = await axiosInstance.get(`/products/categories`);
     return response.data;
@@ -31,8 +31,6 @@ export const getAllCategories = async ({ category }) => {
   }
 };
 export const getProductsByCategory = async ({ category, page = 1 }) => {
-  console.log(`/products/category/${category}?limit=15&skip=${page - 1 * 15}`);
-
   try {
     const response = await axiosInstance.get(
       `/products/category/${category}?limit=15&skip=${(page - 1) * 15}`

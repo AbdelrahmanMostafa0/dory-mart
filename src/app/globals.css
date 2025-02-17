@@ -145,3 +145,12 @@ body {
 .full-screen-section {
   min-height: calc(100dvh - 80px);
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

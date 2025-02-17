@@ -5,22 +5,17 @@ import ProductPagination from "../Pagination";
 import RenderProducts from "@/components/RenderProducts";
 
 const page = async ({ params, searchParams }) => {
-  const page = searchParams?.page || 1;
-
+  const { page } = await searchParams;
+  const { slug } = await params;
   const response = await getProductsByCategory({
-    category: params?.slug,
-    page,
+    category: slug,
+    page: page || 1,
   });
-  console.log(response);
-  //
-  // console.log("Category Slug:", categorySlug);
-  // console.log("Page:", page);
-  // console.log("Order:", order);
 
   return (
     <div className="bg-gray-200">
       <RenderProducts
-        category={params?.slug}
+        category={slug}
         searchParams={searchParams}
         response={response}
         page={page}

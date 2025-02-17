@@ -6,6 +6,7 @@ import Link from "next/link";
 import ProductCard from "./home-page/elements/ProductCard";
 import ProductFilters from "./product-filters/ProductFilters";
 import Categories from "./Categories";
+import SearchCat from "./SearchCat";
 
 const RenderProducts = async ({
   category,
@@ -14,13 +15,10 @@ const RenderProducts = async ({
   limit,
   searchParams,
 }) => {
-  const queries = await searchParams;
-  console.log("this fun", category);
-
   return (
     <PageContainer className={"space-y-4"}>
       <ProductFilters />
-      <Categories curruntCat={category} />
+      <SearchCat curruntCat={category} />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-5 min-h-[80dvh]">
         {response?.products &&
           response?.products.map((prod) => {

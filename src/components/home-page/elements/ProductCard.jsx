@@ -33,8 +33,8 @@ const ProductCard = ({ product }) => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: cardRef.current,
-          start: "top 85%",
-          end: "top 70%",
+          start: "top 100%",
+          end: "top 100%",
           scrub: false,
           toggleActions: "play none none play",
         },
@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
             height={1000}
             alt={product.title}
             src={product.thumbnail}
-            className="w-full h-[300px] bg-gray-100 mb-2 rounded-lg object-cover sm:object-fill"
+            className="w-full h-[300px] bg-gray-100 obje mb-2 rounded-lg object-cover"
           />
         </Link>
         <CardTitle className="mt-2 line-clamp-1">
