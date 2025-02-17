@@ -30,7 +30,7 @@ const SortProducts = () => {
     };
   }, []);
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative w-fit" ref={menuRef}>
       <button
         onClick={toggleMenu}
         type="button"
@@ -40,7 +40,10 @@ const SortProducts = () => {
       </button>
       {menuOpen && (
         <div className="absolute flex flex-col  z-[2] left-0 bg-white border rounded-md ">
-          <button type="button" className="p-2 px-4 border-b ">
+          <button
+            type="button"
+            className="p-2 px-4 border-b whitespace-nowrap "
+          >
             low price
           </button>
           <button type="button" className="p-2 px-4 border-b ">

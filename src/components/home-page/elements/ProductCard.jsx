@@ -6,9 +6,11 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+import { addToCard } from "@/lib/addToCart";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -64,7 +66,25 @@ const ProductCard = ({ product }) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>${product.price}</p>
+        <div className="flex justify-between items-center">
+          {" "}
+          <p>${product.price}</p>
+          <button
+            style={{
+              background: "rgba(1, 89, 158, 0.55)",
+              borderRadius: "16px",
+              boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+              backdropFilter: "blur(11.6px)",
+              WebkitBackdropFilter: "blur(11.6px)", // Note: camelCase for `-webkit-` prefix
+              border: "1px solid rgba(1, 89, 158, 0.09)",
+            }}
+            onClick={() => addToCard(product)}
+            className="relative flex items-center gap-2 text-sm border rounded-full px-4 text-white py-1 "
+          >
+            {/* <ShoppingCart width={20} /> */}
+            <span>Add to cart</span>
+          </button>
+        </div>
       </CardContent>
     </Card>
   );
