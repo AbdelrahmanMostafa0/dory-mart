@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 
 // Register ScrollTrigger
@@ -44,14 +45,20 @@ const ProductCard = ({ product }) => {
   return (
     <Card ref={cardRef} className="prod-card h-fit">
       <CardHeader>
-        <Image
-          width={1000}
-          height={1000}
-          alt={product.title}
-          src={product.thumbnail}
-          className="w-full h-[300px] mb-2 rounded-lg object-cover sm:object-fill"
-        />
-        <CardTitle className="mt-2 line-clamp-1">{product.title}</CardTitle>
+        <Link href={`/product-details/${product.id}`}>
+          <Image
+            width={1000}
+            height={1000}
+            alt={product.title}
+            src={product.thumbnail}
+            className="w-full h-[300px] bg-gray-100 mb-2 rounded-lg object-cover sm:object-fill"
+          />
+        </Link>
+        <CardTitle className="mt-2 line-clamp-1">
+          <Link title={product?.title} href={`/product-details/${product.id}`}>
+            {product.title}
+          </Link>
+        </CardTitle>
         <CardDescription className="line-clamp-2">
           {product.description}
         </CardDescription>

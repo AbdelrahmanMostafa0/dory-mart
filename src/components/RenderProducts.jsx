@@ -5,18 +5,28 @@ import PageContainer from "./ui/PageContainer";
 import Link from "next/link";
 import ProductCard from "./home-page/elements/ProductCard";
 import ProductFilters from "./product-filters/ProductFilters";
+import Categories from "./Categories";
 
-const RenderProducts = ({ response, page, limit }) => {
+const RenderProducts = async ({
+  category,
+  response,
+  page,
+  limit,
+  searchParams,
+}) => {
+  const queries = await searchParams;
+  console.log("this fun", category);
+
   return (
     <PageContainer className={"space-y-4"}>
       <ProductFilters />
+      <Categories curruntCat={category} />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-5 min-h-[80dvh]">
         {response?.products &&
           response?.products.map((prod) => {
-            const priceBefore =
-              (prod.price * 100) / (100 - prod.discountPercentage);
+            const random = Math.floor(Math.random() * 50);
             return (
-              <ProductCard product={prod} key={prod.id} />
+              <ProductCard product={prod} key={prod.id + prod.title + random} />
               // <div
               //   key={prod.id}
               //   className=" border h-fit overflow-hidden  rounded-lg max-w-[350px] w-full bg-white drop-shadow-md "

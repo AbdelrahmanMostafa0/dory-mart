@@ -17,6 +17,16 @@ const page = async ({ params, searchParams }) => {
   // console.log("Page:", page);
   // console.log("Order:", order);
 
-  return <RenderProducts response={response} page={page} limit={15} />;
+  return (
+    <div className="bg-gray-200">
+      <RenderProducts
+        category={params?.slug}
+        searchParams={searchParams}
+        response={response}
+        page={page}
+        limit={15}
+      />
+    </div>
+  );
 };
 export default page;
