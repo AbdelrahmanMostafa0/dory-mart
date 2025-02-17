@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Searchbar from "./Searchbar";
+import { Volume, Volume2 } from "lucide-react";
 const Navbar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [lastScrollY, setLastscrollY] = useState(0);
@@ -98,7 +99,7 @@ const Navbar = () => {
             <FaCartShopping className=" text-xl" />
           </div>
           <button
-            className=" flex items-center space-x-0.5"
+            className=" flex items-center space-x-0.5 text-white"
             onClick={toggleAudio}
           >
             <audio
@@ -111,7 +112,7 @@ const Navbar = () => {
               className="hidden"
               src="/audio/justKeepSwimmingAr.mp3"
             ></audio>{" "}
-            {["", "", "", ""].map((line, i) => {
+            {/* {["", "", "", ""].map((line, i) => {
               return (
                 <div
                   key={i}
@@ -121,7 +122,8 @@ const Navbar = () => {
                   }}
                 />
               );
-            })}
+            })} */}
+            {isAudioPlaying ? <Volume2 /> : <Volume />}
           </button>
           <NavSideMenu />
         </div>
