@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import Image from "next/image";
+import ProductCard from "./elements/ProductCard";
 
 const NewstProducts = async () => {
   const data = await getAllProducts({ limit: 12 });
@@ -23,29 +24,7 @@ const NewstProducts = async () => {
           //     {product.title}
           //     {/* <ProductCard product={product} /> */}
           //   </div>
-          <Card key={product.id}>
-            <CardHeader>
-              <Image
-                width={1000}
-                height={1000}
-                alt={product.title}
-                src={product.thumbnail}
-                className="w-full h-[300px] mb-2 rounded-lg object-cover sm:object-fill"
-              />
-              <CardTitle className="mt-2 line-clamp-1">
-                {product.title}
-              </CardTitle>
-              <CardDescription className={"line-clamp-2"}>
-                {product.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>${product.price}</p>
-            </CardContent>
-            {/* <CardFooter>
-              <p>Card Footer</p>
-            </CardFooter> */}
-          </Card>
+          <ProductCard product={product} key={product.id} />
         ))}
       </div>
     </div>

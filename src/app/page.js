@@ -12,8 +12,6 @@ export const metadata = {
   description: "Just keep shopping",
 };
 export default async function Home() {
-  // const response = await getAllProducts();
-  // console.log(response);
   return (
     <div>
       <Head>

@@ -78,6 +78,10 @@ body {
   }
 
   @font-face {
+    font-family: "impact";
+    src: url("/fonts/impact.woff2") format("woff2");
+  }
+  @font-face {
     font-family: "general";
     src: url("/fonts/general.woff2") format("woff2");
   }
@@ -140,4 +144,13 @@ body {
 
 .full-screen-section {
   min-height: calc(100dvh - 80px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

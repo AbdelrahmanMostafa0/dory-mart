@@ -2,10 +2,19 @@ import { getAllProducts } from "@/apis/productsApis";
 import RenderProducts from "@/components/RenderProducts";
 
 const page = async ({ searchParams }) => {
-  const page = searchParams?.page || 1;
-  const response = await getAllProducts({ limit: 15, page });
+  const queries = await searchParams;
+  const page = queries?.page || 1;
+  const response = await getAllProducts({
+    limit: 15,
+    page,
+    keyword: queries?.q || "",
+  });
   console.log("response", response);
 
-  return <RenderProducts response={response} page={page} limit={15} />;
+  return (
+    <div className="bg-gray-200">
+      <RenderProducts response={response} page={page} limit={15} />
+    </div>
+  );
 };
 export default page;
