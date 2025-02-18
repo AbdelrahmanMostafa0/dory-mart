@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Searchbar from "./Searchbar";
 import { Volume, Volume2 } from "lucide-react";
+import Cart from "./Cart";
 const Navbar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [lastScrollY, setLastscrollY] = useState(0);
@@ -96,7 +97,7 @@ const Navbar = () => {
               <span>عربى</span>
             </button> */}
             <FaHeart className=" text-xl" />
-            <FaCartShopping className=" text-xl" />
+            <Cart />
           </div>
           <button
             className=" flex items-center space-x-0.5 text-white"

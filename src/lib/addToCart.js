@@ -12,6 +12,11 @@ export const addToCard = (product) => {
   };
   const existProduct = cart?.find((item) => item.id === product.id);
 
+  const cartCount = cart?.reduce((acc, item) => {
+    return acc + parseInt(item.quantity);
+  }, 0);
+  console.log(cartCount);
+
   if (existProduct) {
     const filterdCart = cart.filter((item) => item.id !== product.id);
     cart = [
