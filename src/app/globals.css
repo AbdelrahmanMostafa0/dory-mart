@@ -154,3 +154,12 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.glassy-bg {
+  background: rgba(1, 89, 158, 0.55);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.6px);
+  -webkit-backdrop-filter: blur(11.6px); /* Ensure compatibility with Safari */
+  border: 1px solid rgba(1, 89, 158, 0.09);
+}

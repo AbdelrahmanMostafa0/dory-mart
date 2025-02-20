@@ -23,7 +23,7 @@ const ExploreMore = () => {
         // layout="fill"
         objectFit="cover"
         className="w-full md:rounded-2xl md:w-8/12"
-        alt=""
+        alt="explore more cover"
         width={1000}
         height={1000}
       />

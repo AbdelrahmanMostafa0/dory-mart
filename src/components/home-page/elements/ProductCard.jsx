@@ -6,11 +6,10 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { addToCard } from "@/lib/addToCart";
+import useAddToCart from "@/hooks/useAddToCart";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -20,7 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ProductCard = ({ product }) => {
   const cardRef = useRef(null);
-
+  const { addToCart } = useAddToCart();
   useGSAP(() => {
     gsap.fromTo(
       cardRef.current,
@@ -78,7 +77,7 @@ const ProductCard = ({ product }) => {
               WebkitBackdropFilter: "blur(11.6px)", // Note: camelCase for `-webkit-` prefix
               border: "1px solid rgba(1, 89, 158, 0.09)",
             }}
-            onClick={() => addToCard(product)}
+            onClick={() => addToCart(product)}
             className="relative flex items-center gap-2 text-sm border rounded-full px-4 text-white py-1 "
           >
             {/* <ShoppingCart width={20} /> */}

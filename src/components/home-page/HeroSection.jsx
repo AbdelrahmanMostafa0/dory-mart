@@ -37,6 +37,7 @@ const HeroSection = () => {
       >
         <div className="bg-black/30 absolute  w-full h-full"></div>
         <Image
+          alt="hero section image"
           src={"/wallpaperflare.com_wallpaper (2).jpg"}
           width={1920}
           height={1080}

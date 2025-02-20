@@ -1,16 +1,9 @@
 "use client";
-import { fetchCategories } from "@/store/features/categoriesListSlice";
 import "./globals.css";
 import Navbar from "@/components/layout-components/Navbar";
-import { store } from "@/store/store";
 import Head from "next/head";
-import { useEffect } from "react";
-import { Provider, useDispatch, useSelector } from "react-redux";
 import Footer from "@/components/layout-components/Footer";
-// export const metadata = {
-//   title: "Dorymart",
-//   description: "Just keep shopping",
-// };
+import ReduxProvider from "@/components/providers/ReduxProvider";
 
 export default function RootLayout({ children }) {
   return (
@@ -21,11 +14,11 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body>
-        <Provider store={store}>
+        <ReduxProvider>
           <Navbar />
           {children}
           <Footer />
-        </Provider>
+        </ReduxProvider>
       </body>
     </html>
   );
