@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import useAddToCart from "@/hooks/useAddToCart";
+import useCart from "@/hooks/useCart";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,7 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ProductCard = ({ product }) => {
   const cardRef = useRef(null);
-  const { addToCart } = useAddToCart();
+  const { addToCart } = useCart();
   useGSAP(() => {
     gsap.fromTo(
       cardRef.current,
