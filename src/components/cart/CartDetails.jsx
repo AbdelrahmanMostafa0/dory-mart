@@ -7,6 +7,8 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import useCart from "@/hooks/useCart";
 import CartItemCard from "./CartItemCard";
 import CartItemSkeleton from "./CartItemSkeleton";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 const CartDetails = () => {
   const { decreseQuantity, increseQuantity, removeFromCart } = useCart();
@@ -54,7 +56,22 @@ const CartDetails = () => {
                 );
               })
             ) : (
-              "No Items"
+              <div className="min-h-[55dvh] sm:min-h-[65dvh] flex items-center justify-center flex-col gap-4">
+                <Image
+                  src={"/please.png"}
+                  width={300}
+                  height={300}
+                  className="max-w-[330px] mx-auto"
+                />{" "}
+                <h2 className="text-2xl text-center font-z ">
+                  No products in the cart go add pleaseeee
+                </h2>
+                <Button asChild className="bg-blue-600 hover:bg-blue-400">
+                  <Link href="/products" className="text-center">
+                    Go to Search
+                  </Link>
+                </Button>
+              </div>
             )
           ) : (
             <>
