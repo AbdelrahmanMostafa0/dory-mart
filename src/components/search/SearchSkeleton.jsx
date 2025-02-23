@@ -1,6 +1,6 @@
 "use client";
 import { useWindowSize } from "react-use";
-import PageContainer from "./ui/PageContainer";
+import PageContainer from "../ui/PageContainer";
 
 const SearchSkeleton = () => {
   const { width } = useWindowSize();

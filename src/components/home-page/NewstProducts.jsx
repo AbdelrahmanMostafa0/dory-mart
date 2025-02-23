@@ -1,4 +1,4 @@
-import { getAllProducts } from "@/apis/productsApis";
+import { getAllProducts } from "@/services/productService";
 import {
   Card,
   CardContent,
@@ -12,6 +12,7 @@ import ProductCard from "./elements/ProductCard";
 
 const NewstProducts = async () => {
   const data = await getAllProducts({ limit: 12 });
+  console.log(data);
 
   return (
     <div className="container mx-auto space-y-8 py-10 ">

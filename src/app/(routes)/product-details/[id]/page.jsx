@@ -1,4 +1,4 @@
-import { getSingleProduct } from "@/apis/productsApis";
+import { getSingleProduct } from "@/services/productService";
 import PageContainer from "@/components/ui/PageContainer";
 
 const page = async ({ params }) => {

@@ -1,6 +1,6 @@
 "use client";
 import "./globals.css";
-import Navbar from "@/components/layout-components/Navbar";
+import Navbar from "@/components/layout-components/navbar/Navbar";
 import Head from "next/head";
 import Footer from "@/components/layout-components/Footer";
 import ReduxProvider from "@/components/providers/ReduxProvider";

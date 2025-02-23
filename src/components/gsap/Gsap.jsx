@@ -16,7 +16,7 @@ const Gsap = () => {
     },
     { dependencies: [endX], scope: container }
   );
-  console.log(Math.round(Math.random() * 100));
+  // console.log(Math.round(Math.random() * 100));
   const randomX =
     Math.round(Math.random() * 500) *
     (Math.round(Math.random() * 10) > 5 ? -1 : 1);

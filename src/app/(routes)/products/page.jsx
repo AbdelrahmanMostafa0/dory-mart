@@ -1,5 +1,5 @@
-import { getAllProducts } from "@/apis/productsApis";
-import RenderProducts from "@/components/RenderProducts";
+import { getAllProducts } from "@/services/productService";
+import RenderProducts from "@/components/search/RenderProducts";
 
 const page = async ({ searchParams }) => {
   const queries = await searchParams;
@@ -9,7 +9,6 @@ const page = async ({ searchParams }) => {
     page,
     keyword: queries?.q || "",
   });
-  console.log("response", response);
 
   return (
     <div className="bg-gray-200">

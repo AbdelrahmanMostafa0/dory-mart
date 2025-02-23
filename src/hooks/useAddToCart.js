@@ -8,18 +8,6 @@ import { useDispatch } from "react-redux";
 
 const useAddToCart = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    dispatch(updateCart(storedCart));
-    dispatch(
-      updateQuantity(storedCart.reduce((acc, item) => acc + item.quantity, 0))
-    );
-    dispatch(
-      updatePrice(
-        storedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
-      )
-    );
-  }, []);
 
   const addToCart = (product) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -38,6 +26,8 @@ const useAddToCart = () => {
           price: product?.price,
           image: product?.thumbnail,
           id: product?.id,
+          description: product?.description,
+          brand: product?.brand,
           quantity: 1,
         },
       ];

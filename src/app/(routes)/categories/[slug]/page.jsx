@@ -1,8 +1,8 @@
-import { getProductsByCategory } from "@/apis/productsApis";
+import { getProductsByCategory } from "@/services/productService";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
 import ProductPagination from "../Pagination";
-import RenderProducts from "@/components/RenderProducts";
+import RenderProducts from "@/components/search/RenderProducts";
 
 const page = async ({ params, searchParams }) => {
   const { page } = await searchParams;

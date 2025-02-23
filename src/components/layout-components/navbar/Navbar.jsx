@@ -14,6 +14,11 @@ import Image from "next/image";
 import Searchbar from "./Searchbar";
 import { Volume, Volume2 } from "lucide-react";
 import Cart from "./Cart";
+import {
+  updateCart,
+  updatePrice,
+  updateQuantity,
+} from "@/store/features/cartSlice";
 const Navbar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [lastScrollY, setLastscrollY] = useState(0);
@@ -23,6 +28,7 @@ const Navbar = () => {
   const productsCat = useSelector(
     (state) => state.ProductsCategories.categories
   );
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (!productsCat) {
@@ -43,7 +49,18 @@ const Navbar = () => {
   const { y: currentScrollY } = useWindowScroll();
   const router = useRouter();
   const isHome = router.pathname === "/";
-
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    dispatch(updateCart(storedCart));
+    dispatch(
+      updateQuantity(storedCart.reduce((acc, item) => acc + item.quantity, 0))
+    );
+    dispatch(
+      updatePrice(
+        storedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+      )
+    );
+  }, []);
   useEffect(() => {
     if (isHome) {
       if (currentScrollY === 0) {

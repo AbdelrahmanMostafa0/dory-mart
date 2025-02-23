@@ -1,4 +1,4 @@
-import { getAllCategories } from "@/apis/productsApis";
+import { getAllCategories } from "@/services/productService";
 import Categories from "./Categories";
 
 const SearchCat = async ({ curruntCat }) => {

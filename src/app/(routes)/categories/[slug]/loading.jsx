@@ -1,4 +1,4 @@
-import SearchSkeleton from "@/components/SearchSkeleton";
+import SearchSkeleton from "@/components/search/SearchSkeleton";
 import PageContainer from "@/components/ui/PageContainer";
 
 const loading = () => {

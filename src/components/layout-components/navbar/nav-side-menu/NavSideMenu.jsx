@@ -34,14 +34,12 @@ const NavSideMenu = () => {
           <div className="size-full   overflow-y-auto">
             <div className="h-dvh max-h-[83dvh] space-y-4">
               <div className="grid grid-cols-2 gap-2">
-                <div onClick={() => console.log("close")}>
-                  <SheetClose className="w-full">
-                    <div className="w-full min-h-20 py-6 bg-white border drop-shadow-md rounded-md flex flex-col  items-center justify-center">
-                      <FaCartShopping className=" text-xl" />
-                      <p className="text-center font-semibold ">Cart</p>
-                    </div>
-                  </SheetClose>
-                </div>
+                <SheetClose className="w-full">
+                  <div className="w-full min-h-20 py-6 bg-white border drop-shadow-md rounded-md flex flex-col  items-center justify-center">
+                    <FaCartShopping className=" text-xl" />
+                    <p className="text-center font-semibold ">Cart</p>
+                  </div>
+                </SheetClose>
                 <div className="w-full min-h-20 py-6 bg-white border drop-shadow-md rounded-md flex flex-col  items-center justify-center">
                   {" "}
                   <FaHeart className=" text-xl" />
