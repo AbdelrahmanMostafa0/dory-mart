@@ -19,6 +19,7 @@ import {
   updatePrice,
   updateQuantity,
 } from "@/store/features/cartSlice";
+import { updateSaved } from "@/store/features/savedItemsSlice";
 const Navbar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [lastScrollY, setLastscrollY] = useState(0);
@@ -51,6 +52,7 @@ const Navbar = () => {
   const isHome = router.pathname === "/";
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const savedForLater = JSON.parse(localStorage.getItem("saved")) || [];
     dispatch(updateCart(storedCart));
     dispatch(
       updateQuantity(storedCart.reduce((acc, item) => acc + item.quantity, 0))
@@ -60,6 +62,7 @@ const Navbar = () => {
         storedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
       )
     );
+    dispatch(updateSaved(savedForLater));
   }, []);
   useEffect(() => {
     if (isHome) {
