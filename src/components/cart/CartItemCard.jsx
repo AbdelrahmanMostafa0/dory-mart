@@ -6,7 +6,8 @@ import { CiBookmark } from "react-icons/ci";
 import Image from "next/image";
 
 const CartItemCard = ({ item, isLast }) => {
-  const { decreseQuantity, increseQuantity, removeFromCart } = useCart();
+  const { decreseQuantity, increseQuantity, removeFromCart, saveForLater } =
+    useCart();
   const deleteFromCart = () => removeFromCart(item.id);
   return (
     <div
@@ -74,7 +75,10 @@ const CartItemCard = ({ item, isLast }) => {
           >
             <FaRegTrashCan className="text-red-500" /> Remove
           </button>
-          <button className="justify-self-end  flex items-center h-fit gap-2 p-1 border rounded-lg px-3 ">
+          <button
+            onClick={() => saveForLater(item.id)}
+            className="justify-self-end  flex items-center h-fit gap-2 p-1 border rounded-lg px-3 "
+          >
             <CiBookmark /> Save for later
           </button>
         </div>
