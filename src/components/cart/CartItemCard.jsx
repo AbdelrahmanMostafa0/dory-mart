@@ -55,7 +55,7 @@ const CartItemCard = ({ item, isLast, savedForLater }) => {
             <CardDescription>{item.brand}</CardDescription>
           </div>
           <p className="flex items-center gap-2 font-semibold ">
-            ${item.price * item.quantity}{" "}
+            ${parseFloat(item.price * item.quantity).toFixed(2)}{" "}
             {!savedForLater && (
               <span className="text-gray-400 text-xs font-normal">
                 ( ${item.price} x {item.quantity} )
@@ -69,8 +69,9 @@ const CartItemCard = ({ item, isLast, savedForLater }) => {
           {!savedForLater && (
             <div className="flex gap-4 items-center">
               <button
+                disabled={item.quantity === 1}
                 onClick={() => decreseQuantity(item.id)}
-                className="glassy-bg w-5 sm:w-6 h-5 sm:h-6 rounded-full grid place-content-center text-white text-xl"
+                className="disabled:opacity-50 glassy-bg w-5 sm:w-6 h-5 sm:h-6 rounded-full grid place-content-center text-white text-xl"
               >
                 -
               </button>
