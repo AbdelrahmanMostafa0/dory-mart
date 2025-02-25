@@ -8,21 +8,27 @@ import CartItemSkeleton from "./CartItemSkeleton";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import CartSummary from "./CartSummary";
+import SavedForLater from "./SavedForLater";
 
 const CartDetails = () => {
   const cartInfo = useSelector((state) => state.cart);
   return (
     <PageContainer className={"space-y-10"}>
       <h1 className="text-6xl font-zentry text-center">My Cart</h1>
-      <div className="grid lg:grid-cols-8 mx-auto  flex-col gap-6 md:gap-4 ">
-        <div className="lg:col-span-6 space-y-4 pt-2 px-3 w-full">
+      <div className="grid lg:grid-cols-8 mx-auto  flex-col gap-8 lg:gap-4 ">
+        <div className="lg:col-span-6 space-y-8 pt-2 px-3 w-full">
           {cartInfo.cart ? (
             cartInfo?.cart?.length > 0 ? (
               <div className="w-full grid sm:grid-cols-2 md:grid-cols-1 gap-6 ">
                 {cartInfo.cart.map((item, index, cartItems) => {
                   const isLast = index + 1 === cartItems.length;
                   return (
-                    <CartItemCard isLast={isLast} item={item} key={item.id} />
+                    <CartItemCard
+                      savedForLater={false}
+                      isLast={isLast}
+                      item={item}
+                      key={item.id}
+                    />
                   );
                 })}
               </div>
@@ -46,16 +52,23 @@ const CartDetails = () => {
               </div>
             )
           ) : (
-            <>
+            <div className="grid gap-6">
               <CartItemSkeleton></CartItemSkeleton>
               <CartItemSkeleton></CartItemSkeleton>
               <CartItemSkeleton></CartItemSkeleton>
               <CartItemSkeleton></CartItemSkeleton>
-            </>
+            </div>
           )}
+
+          <div className="hidden lg:block">
+            <SavedForLater />
+          </div>
         </div>
         <div className="lg:col-span-2 relative">
           <CartSummary />
+        </div>
+        <div className="block lg:hidden">
+          <SavedForLater />
         </div>
       </div>
     </PageContainer>

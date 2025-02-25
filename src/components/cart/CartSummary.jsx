@@ -24,7 +24,6 @@ const CartSummary = () => {
           <p>${total}</p>
         </div>
       </div>
-      {console.log(Boolean(!cartInfo?.totalPrice))}
       {!!cartInfo?.totalPrice && (
         <Button
           asChild

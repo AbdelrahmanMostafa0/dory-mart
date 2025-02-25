@@ -24,8 +24,6 @@ const useCart = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
   const updateSavedItems = (item) => {
-    console.log(item);
-
     const existProduct = savedItems?.find((product) => product.id === item.id);
     if (existProduct) {
       return;
@@ -39,24 +37,29 @@ const useCart = () => {
   const addToCart = (product) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const existProduct = storedCart.find((item) => item.id === product.id);
+    const existinSavedItems = savedItems?.find(
+      (item) => item.id === product.id
+    );
     let updatedCart;
-
     if (existProduct) {
       updatedCart = storedCart.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
     } else {
+      if (existinSavedItems) {
+        removeFromSaved(product.id);
+      }
       updatedCart = [
-        ...storedCart,
         {
           title: product?.title,
           price: product?.price,
-          image: product?.thumbnail,
+          thumbnail: product?.thumbnail,
           id: product?.id,
           description: product?.description,
           brand: product?.brand,
           quantity: 1,
         },
+        ...storedCart,
       ];
     }
     updateAllCart(updatedCart);
@@ -64,6 +67,11 @@ const useCart = () => {
   const removeFromCart = (id) => {
     const filterdCart = cartInfo?.cart?.filter((item) => item.id !== id);
     updateAllCart(filterdCart);
+  };
+  const removeFromSaved = (id) => {
+    const filterdCart = savedItems?.filter((item) => item.id !== id);
+    dispatch(updateSaved(filterdCart));
+    localStorage.setItem("saved", JSON.stringify(filterdCart));
   };
 
   const increseQuantity = (id) => {
@@ -95,6 +103,7 @@ const useCart = () => {
   return {
     addToCart,
     removeFromCart,
+    removeFromSaved,
     increseQuantity,
     decreseQuantity,
     saveForLater,

@@ -4,11 +4,23 @@ import { CardDescription } from "../ui/card";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
 import Image from "next/image";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
-const CartItemCard = ({ item, isLast }) => {
-  const { decreseQuantity, increseQuantity, removeFromCart, saveForLater } =
-    useCart();
-  const deleteFromCart = () => removeFromCart(item.id);
+const CartItemCard = ({ item, isLast, savedForLater }) => {
+  const {
+    decreseQuantity,
+    increseQuantity,
+    removeFromCart,
+    saveForLater,
+    removeFromSaved,
+    addToCart,
+  } = useCart();
+  const deleteFromCart = () =>
+    !savedForLater ? removeFromCart(item.id) : removeFromSaved(item.id);
+  const addSavedToCart = () => {
+    addToCart(item);
+    removeFromSaved(item.id);
+  };
   return (
     <div
       className={`md:grid w-full grid-cols-5 gap-4 justify-between pb-5 ${
@@ -24,7 +36,7 @@ const CartItemCard = ({ item, isLast }) => {
             <FaRegTrashCan className="text-red-500" />
           </button>
           <Image
-            src={item.image}
+            src={item.thumbnail}
             width={300}
             height={300}
             alt={item.title}
@@ -44,29 +56,33 @@ const CartItemCard = ({ item, isLast }) => {
           </div>
           <p className="flex items-center gap-2 font-semibold ">
             ${item.price * item.quantity}{" "}
-            <span className="text-gray-400 text-xs font-normal">
-              ( ${item.price} x {item.quantity} )
-            </span>{" "}
+            {!savedForLater && (
+              <span className="text-gray-400 text-xs font-normal">
+                ( ${item.price} x {item.quantity} )
+              </span>
+            )}
           </p>
         </div>
       </div>
       <div className="w-full flex justify-between items-center md:items-start md:col-span-2 ">
         <div className="justify-self-end ">
-          <div className="flex gap-4 items-center">
-            <button
-              onClick={() => decreseQuantity(item.id)}
-              className="glassy-bg w-5 sm:w-6 h-5 sm:h-6 rounded-full grid place-content-center text-white text-xl"
-            >
-              -
-            </button>
-            <p className="text-xl min-w-4 text-center"> {item.quantity}</p>
-            <button
-              onClick={() => increseQuantity(item.id)}
-              className="glassy-bg w-5 sm:w-6 h-5 sm:h-6 rounded-full grid place-content-center text-white text-xl"
-            >
-              +
-            </button>
-          </div>
+          {!savedForLater && (
+            <div className="flex gap-4 items-center">
+              <button
+                onClick={() => decreseQuantity(item.id)}
+                className="glassy-bg w-5 sm:w-6 h-5 sm:h-6 rounded-full grid place-content-center text-white text-xl"
+              >
+                -
+              </button>
+              <p className="text-xl min-w-4 text-center"> {item.quantity}</p>
+              <button
+                onClick={() => increseQuantity(item.id)}
+                className="glassy-bg w-5 sm:w-6 h-5 sm:h-6 rounded-full grid place-content-center text-white text-xl"
+              >
+                +
+              </button>
+            </div>
+          )}
         </div>
         <div className="h-full justify-between items-end flex flex-col gap-2">
           <button
@@ -75,12 +91,21 @@ const CartItemCard = ({ item, isLast }) => {
           >
             <FaRegTrashCan className="text-red-500" /> Remove
           </button>
-          <button
-            onClick={() => saveForLater(item.id)}
-            className="justify-self-end  flex items-center h-fit gap-2 p-1 border rounded-lg px-3 "
-          >
-            <CiBookmark /> Save for later
-          </button>
+          {savedForLater ? (
+            <button
+              onClick={addSavedToCart}
+              className="justify-self-end  flex items-center h-fit gap-2 p-1 border rounded-lg px-3 "
+            >
+              <MdOutlineShoppingCart /> Add to cart
+            </button>
+          ) : (
+            <button
+              onClick={() => saveForLater(item.id)}
+              className="justify-self-end  flex items-center h-fit gap-2 p-1 border rounded-lg px-3 "
+            >
+              <CiBookmark /> Save for later
+            </button>
+          )}
         </div>
       </div>
     </div>
