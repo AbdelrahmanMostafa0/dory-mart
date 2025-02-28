@@ -10,16 +10,29 @@ import useCart from "@/hooks/useCart";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-
+import { FaSpinner } from "react-icons/fa6";
+import { toast } from "sonner";
+// import { toast } from "sonner";
+toast;
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
 const ProductCard = ({ product }) => {
   const cardRef = useRef(null);
-  const { addToCart } = useCart();
+  const { addToCart, loading } = useCart();
+  const notify = () => {
+    toast("Event has been created", {
+      description: "Sunday, December 03, 2023 at 9:00 AM",
+      action: {
+        label: "Undo",
+        onClick: () => console.log("Undo"),
+      },
+    });
+  };
   useGSAP(() => {
     gsap.fromTo(
       cardRef.current,
@@ -69,19 +82,32 @@ const ProductCard = ({ product }) => {
           {" "}
           <p>${product.price}</p>
           <button
-            style={{
-              background: "rgba(1, 89, 158, 0.55)",
-              borderRadius: "16px",
-              boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-              backdropFilter: "blur(11.6px)",
-              WebkitBackdropFilter: "blur(11.6px)", // Note: camelCase for `-webkit-` prefix
-              border: "1px solid rgba(1, 89, 158, 0.09)",
+            onClick={() => {
+              addToCart(product);
+              notify();
             }}
-            onClick={() => addToCart(product)}
-            className="relative flex items-center gap-2 text-sm border rounded-full px-4 text-white py-1 "
+            // onClick={
+            //   () => console.log("assdasdWS")
+
+            //   // toast("Event has been created", {
+            //   //   description: "Sunday, December 03, 2023 at 9:00 AM",
+            //   //   action: {
+            //   //     label: "Undo",
+            //   //     onClick: () => console.log("Undo"),
+            //   //   },
+            //   // })
+            // }
+            className="relative flex items-center glassy-bg gap-2 min-w-36 justify-center min-h-[35px] text-sm border rounded-full px-4 text-white py-1 "
           >
-            {/* <ShoppingCart width={20} /> */}
-            <span>Add to cart</span>
+            {loading ? (
+              <FaSpinner className="animate-spin" />
+            ) : (
+              <>
+                <ShoppingCart width={20} />
+
+                <span>Add to cart</span>
+              </>
+            )}
           </button>
         </div>
       </CardContent>

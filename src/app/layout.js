@@ -4,6 +4,7 @@ import Navbar from "@/components/layout-components/navbar/Navbar";
 import Head from "next/head";
 import Footer from "@/components/layout-components/Footer";
 import ReduxProvider from "@/components/providers/ReduxProvider";
+import Toast from "@/components/ui/Toast";
 
 export default function RootLayout({ children }) {
   return (
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <ReduxProvider>
           <Navbar />
           {children}
+          <Toast />
           <Footer />
         </ReduxProvider>
       </body>

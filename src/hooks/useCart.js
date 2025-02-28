@@ -1,3 +1,4 @@
+"use client";
 import {
   updateCart,
   updatePrice,
@@ -8,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const useCart = () => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const cartInfo = useSelector((state) => state.cart);
   const savedItems = useSelector((state) => state.savedForLater.savedItems);
@@ -34,7 +36,8 @@ const useCart = () => {
     dispatch(updateSaved(updatedSavedItems));
     localStorage.setItem("saved", JSON.stringify(updatedSavedItems));
   };
-  const addToCart = (product) => {
+  const addToCart = async (product) => {
+    setLoading(true);
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const existProduct = storedCart.find((item) => item.id === product.id);
     const existinSavedItems = savedItems?.find(
@@ -62,7 +65,10 @@ const useCart = () => {
         ...storedCart,
       ];
     }
-    updateAllCart(updatedCart);
+    await updateAllCart(updatedCart);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
   const removeFromCart = (id) => {
     const filterdCart = cartInfo?.cart?.filter((item) => item.id !== id);
@@ -107,6 +113,7 @@ const useCart = () => {
     increseQuantity,
     decreseQuantity,
     saveForLater,
+    loading,
   };
 };
 
