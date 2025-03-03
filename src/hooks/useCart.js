@@ -5,6 +5,7 @@ import {
   updateQuantity,
 } from "@/store/features/cartSlice";
 import { updateSaved } from "@/store/features/savedItemsSlice";
+import { updateToast } from "@/store/features/toastSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -66,6 +67,13 @@ const useCart = () => {
       ];
     }
     await updateAllCart(updatedCart);
+    dispatch(
+      updateToast({
+        title: "Product Added To Cart",
+        description: product?.title,
+        // undoAction: () => removeFromCart(product.id),
+      })
+    );
     setTimeout(() => {
       setLoading(false);
     }, 500);
