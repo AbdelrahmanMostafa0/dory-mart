@@ -73,12 +73,7 @@ const PhoneNumberInput = ({
   };
   return (
     <div className="space-y-2 ">
-      <div className="flex gap-4">
-        <input
-          className={cn("focus:outline-none border rounded-lg px-3 py-1.5 ")}
-        />
-      </div>
-      {/* <div
+      <div
         className={cn(
           "flex h-[50px] w-full gap-1 items-start",
           containerClassName
@@ -91,7 +86,7 @@ const PhoneNumberInput = ({
           <button
             onClick={() => setShowMenu((prev) => !prev)}
             className={cn(
-              "h-full  text-sm flex items-center justify-center gap-1  w-full rounded-md border-2 outline-none bg-white p-1 focus:border-blue-500",
+              "h-full  text-sm flex items-center justify-center gap-1  w-full rounded-md border outline-none bg-white p-1 focus:border-blue-500",
               btnStyle
             )}
             type="button"
@@ -121,7 +116,7 @@ const PhoneNumberInput = ({
                     <button
                       onClick={() => setCode(c.code)}
                       type="button"
-                      className="w-[182px] flex items-center gap-1 text-start border-b mx-auto px-2 py-1 line-clamp-1"
+                      className="w-[182px] flex items-center gap-1  text-start border-b mx-auto px-2 py-1 line-clamp-1"
                       key={c.en + c.ar}
                     >
                       <Image
@@ -157,7 +152,7 @@ const PhoneNumberInput = ({
             },
           })}
           className={cn(
-            `w-full bg-white border-2  border-gray-400 focus:border-blue-500 outline-none px-3 rounded-md h-full my-0 ${
+            `w-full bg-white border   focus:border-blue-500 outline-none px-3 rounded-md h-full my-0 ${
               (errors[phoneIdentifier] || error) &&
               "focus:border-red-500 border-red-500"
             } `,
@@ -167,7 +162,7 @@ const PhoneNumberInput = ({
           inputMode="tel"
           placeholder={placeholder}
         />
-      </div> */}
+      </div>
       {errors[phoneIdentifier] && (
         <Error>{errors[phoneIdentifier]?.message}</Error>
       )}
