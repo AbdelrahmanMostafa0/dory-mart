@@ -2,32 +2,20 @@
 
 import PhoneNumberInput from "@/shared/PhoneNumberInput";
 import { useForm } from "react-hook-form";
+import ShippingInfo from "./ShippingInfo";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const CheckoutPage = () => {
-  const {
-    register,
-    setValue,
-    clearErrors,
-    watch,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    defaultValues: {
-      code: "+20",
-      phone: "",
-    },
-  });
+  const [showBillingForm, setShowBillingForm] = useState(false);
+  useEffect(() => {}, []);
   return (
-    <div className="flex md:flex-raw flex-col-reverse items-start gap-4">
-      <div className="grid md:grid-cols-2 w-[75%] bg-gray-300 min-h-svh gap-2">
-        <input className="w-full  h-[50px] bg-white border   focus:border-blue-500 outline-none px-3 rounded-md my-0 " />
-        <PhoneNumberInput
-          errors={errors}
-          register={register}
-          setValue={setValue}
-          watch={watch}
-        />
+    <div className="space-y-6">
+      <h1 className="text-6xl font-zentry text-center">Checkout</h1>
+      <div className="flex lg:flex-row flex-col items-start gap-6">
+        <ShippingInfo />
+
+        <div className="w-full p-5 bg-white rounded-md shadow-md border">a</div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 "use client";
+import Input from "@/components/ui/Input";
 import { phoneCodes } from "@/data/phoneCodes";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -134,7 +135,7 @@ const PhoneNumberInput = ({
             </div>
           )}
         </div>
-        <input
+        <Input
           autoComplete="off"
           {...register(phoneIdentifier, {
             required: {
@@ -151,20 +152,16 @@ const PhoneNumberInput = ({
               },
             },
           })}
-          className={cn(
-            `w-full bg-white border   focus:border-blue-500 outline-none px-3 rounded-md h-full my-0 ${
-              (errors[phoneIdentifier] || error) &&
-              "focus:border-red-500 border-red-500"
-            } `,
-            inputStyle
-          )}
+          error={errors[phoneIdentifier] || error}
           type="number"
           inputMode="tel"
           placeholder={placeholder}
         />
       </div>
       {errors[phoneIdentifier] && (
-        <Error>{errors[phoneIdentifier]?.message}</Error>
+        <p className="text-red-500 text-sm">
+          {errors[phoneIdentifier]?.message}
+        </p>
       )}
     </div>
   );

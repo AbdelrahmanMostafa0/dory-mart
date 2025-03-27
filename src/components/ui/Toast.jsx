@@ -15,6 +15,7 @@ const Toast = ({}) => {
         bottom: 10,
         opacity: 1,
         duration: 0.3,
+        display: "flex",
       });
 
       setTimeout(() => {
@@ -31,7 +32,7 @@ const Toast = ({}) => {
   }, [data?.title]);
 
   return (
-    <div className="fixed toast    sm:-bottom-52 sm:top-auto z-50 mx-auto sm:right-5 sm:mx-auto flex w-full justify-center sm:justify-end">
+    <div className="fixed toast  sm:-bottom-52 sm:top-auto z-50 mx-auto sm:right-5 sm:mx-auto hidden w-full justify-center sm:justify-end">
       <div className="p-4 rounded-md bg-white drop-shadow-lg w-[90vw] sm:min-w-96 sm:w-fit border min-h-20">
         <div className="flex justify-between items-center">
           <div className="space-y-1">
