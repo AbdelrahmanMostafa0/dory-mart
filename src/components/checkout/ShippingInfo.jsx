@@ -40,13 +40,16 @@ const ShippingInfo = () => {
     // Submit form data
     const shippingInfo = JSON.parse(localStorage.getItem("shippingInfo")) || [];
     if (shippingInfo && shippingInfo.length > 0) {
-      const newId = shippingInfo[shippingInfo.length - 1]?.id || 0 + 1;
-      const newItem = { id: newId, ...data };
-      const updatedShippingInfo = [newItem, ...shippingInfo];
+      const newId = shippingInfo[shippingInfo.length - 1]?.id  + 1;
+      const newItem = { id: newId, ...data, selected: true };
+      const newShippingInfo = shippingInfo.map((item) => {
+        return { ...item, selected: false };
+      });
+      const updatedShippingInfo = [newItem, ...newShippingInfo];
       dispatch(updateShippingInfo(updatedShippingInfo));
       localStorage.setItem("shippingInfo", JSON.stringify(updatedShippingInfo));
     } else {
-      const newItem = { id: 1, ...data };
+      const newItem = { id: 1, ...data, selected: true };
       dispatch(updateShippingInfo([newItem]));
       localStorage.setItem("shippingInfo", JSON.stringify([newItem]));
     }
