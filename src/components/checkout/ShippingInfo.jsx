@@ -34,13 +34,15 @@ const ShippingInfo = () => {
       moreInfo: "",
     },
   });
+  console.log("shippingInfo", shippingInfo?.length);
+
   const onSubmit = (data) => {
     console.log(data);
 
     // Submit form data
-    const shippingInfo = JSON.parse(localStorage.getItem("shippingInfo")) || [];
     if (shippingInfo && shippingInfo.length > 0) {
-      const newId = shippingInfo[shippingInfo.length - 1]?.id  + 1;
+      const newId = shippingInfo[0]?.id + 1;
+
       const newItem = { id: newId, ...data, selected: true };
       const newShippingInfo = shippingInfo.map((item) => {
         return { ...item, selected: false };
