@@ -1,10 +1,12 @@
+"use client";
 import PhoneNumberInput from "@/shared/PhoneNumberInput";
 import { useForm } from "react-hook-form";
 import Input from "../ui/Input";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateShippingInfo } from "@/store/features/shippingInfoSlice";
-
+import { MdDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
 const ShippingInfo = () => {
   const [showForm, setShowForm] = useState(false);
   const shippingInfo = useSelector((state) => state.shippingInfo.info);
@@ -32,16 +34,37 @@ const ShippingInfo = () => {
     },
   });
   const onSubmit = (data) => {
+    console.log(data);
+
     // Submit form data
-    const shippingInfo = JSON.parse(localStorage.getItem("shippingInfo"));
-    if (shippingInfo) {
-      shippingInfo.push(data);
-      localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
+    const shippingInfo = JSON.parse(localStorage.getItem("shippingInfo")) || [];
+    if (shippingInfo && shippingInfo.length > 0) {
+      const newId = shippingInfo[shippingInfo.length - 1]?.id || 0 + 1;
+      const newItem = { id: newId, ...data };
+      const updatedShippingInfo = [newItem, ...shippingInfo];
+      dispatch(updateShippingInfo(updatedShippingInfo));
+      localStorage.setItem("shippingInfo", JSON.stringify(updatedShippingInfo));
     } else {
-      localStorage.setItem("shippingInfo", JSON.stringify([data]));
+      const newItem = { id: 1, ...data };
+      dispatch(updateShippingInfo([newItem]));
+      localStorage.setItem("shippingInfo", JSON.stringify([newItem]));
     }
     reset();
+    setShowForm(false);
+    clearErrors();
   };
+  const deleteAdreess = (id) => {
+    const updatedShippingInfo = shippingInfo.filter((item) => item.id !== id);
+    dispatch(updateShippingInfo(updatedShippingInfo));
+    localStorage.setItem("shippingInfo", JSON.stringify(updatedShippingInfo));
+  };
+  useEffect(() => {
+    if (shippingInfo && shippingInfo.length > 0) {
+      setShowForm(false);
+    } else {
+      setShowForm(true);
+    }
+  }, [shippingInfo]);
   useEffect(() => {
     /* 
     if address check the last address in use 
@@ -63,9 +86,20 @@ const ShippingInfo = () => {
           {shippingInfo.map((item, index) => {
             return (
               <div
-                className="space-y-2 p-4 border rounded bg-white drop-shadow-md overflow-hidden "
+                className="space-y-2 p-4 border rounded bg-white drop-shadow-md overflow-hidden relative"
                 key={index}
               >
+                <div className="flex items-center top-3 absolute right-3 gap-1">
+                  <button
+                    onClick={() => deleteAdreess(item.id)}
+                    className="  text-primary hover:text-red-500 duration-150"
+                  >
+                    <MdDelete />
+                  </button>
+                  <button className="  text-primary hover:text-blue-500 duration-150">
+                    <FaRegEdit />
+                  </button>
+                </div>
                 <p>Email: {item.email}</p>
                 <p>
                   Name: {item.fname} {item.lname}
@@ -78,7 +112,7 @@ const ShippingInfo = () => {
           })}
         </div>
       )}
-      {!showForm && (
+      {showForm && (
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="grid lg:grid-cols-2   gap-x-4 gap-y-6"
@@ -128,7 +162,7 @@ const ShippingInfo = () => {
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="apartment" className="text-lg">
+            <label htmlFor="apartment" className="text-lg line-clamp-1">
               Apartment/Building Number
             </label>
             <Input
@@ -182,6 +216,16 @@ const ShippingInfo = () => {
             </button>
           </div>
         </form>
+      )}
+      {!showForm && (
+        <div className="flex items-center gap-x-4">
+          <button
+            onClick={() => setShowForm(true)}
+            className="w-full text-center p-3 rounded-md bg-blue-500 hover:bg-blue-400 duration-150 text-white"
+          >
+            Add New Address
+          </button>
+        </div>
       )}
     </div>
   );
