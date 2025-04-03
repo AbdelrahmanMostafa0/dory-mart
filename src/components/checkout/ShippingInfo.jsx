@@ -1,3 +1,10 @@
+/*
+// todo: cancel add address
+todo: checkout card 
+todo: checkout card logic
+todo: page logic if no data
+todo: checkout page skeleton
+*/
 "use client";
 import PhoneNumberInput from "@/shared/PhoneNumberInput";
 import { useForm } from "react-hook-form";
@@ -68,11 +75,6 @@ const ShippingInfo = () => {
     }
   }, [shippingInfo]);
   useEffect(() => {
-    /* 
-    if address check the last address in use 
-    if not show the address form 
-    Todo: button to add 
-    */
     const shippingInfo = JSON.parse(localStorage.getItem("shippingInfo"));
     if (shippingInfo) {
       dispatch(updateShippingInfo(shippingInfo));
@@ -87,12 +89,23 @@ const ShippingInfo = () => {
       {showForm && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid lg:grid-cols-2   gap-x-4 gap-y-6"
+          className="grid lg:grid-cols-2   gap-x-4 gap-y-6 "
         >
           <div className="space-y-2 lg:col-span-2">
-            <label htmlFor="email" className="text-lg">
-              Email
-            </label>
+            <div className="flex justify-between">
+              <label htmlFor="email" className="text-lg">
+                Email
+              </label>
+              {shippingInfo && shippingInfo?.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setShowForm(false)}
+                  className="text-red-500"
+                >
+                  cancel
+                </button>
+              )}
+            </div>
             <Input
               type="email"
               error={errors.email}
