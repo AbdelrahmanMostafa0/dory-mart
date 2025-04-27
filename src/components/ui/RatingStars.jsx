@@ -15,8 +15,8 @@ const RatingStars = ({ rating }) => {
           // Half star
           return <FaStarHalfAlt key={index} color="#ffc107" size={20} />;
         } else {
-          // Empty star
-          return <FaRegStar key={index} color="#e4e5e9" size={20} />;
+          // Empty star with a different color
+          return <FaRegStar key={index} color="#bbb" size={20} />;
         }
       })}
     </div>

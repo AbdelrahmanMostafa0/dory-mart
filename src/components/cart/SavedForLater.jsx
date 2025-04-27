@@ -13,7 +13,7 @@ const SavedForLater = () => {
             const isLast = i + 1 === items.length;
             return (
               <CartItemCard
-                savedForLater={true}
+                savedForLater
                 item={item}
                 key={item.id}
                 isLast={isLast}
