@@ -24,7 +24,6 @@ export async function generateMetadata({ params }) {
 const page = async ({ params }) => {
   const { id } = await params;
   const data = await getSingleProduct({ id });
-  console.log(data);
 
   return (
     <PageContainer>

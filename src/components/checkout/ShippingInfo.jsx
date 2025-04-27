@@ -18,7 +18,6 @@ import UserAdresses from "./UserAdresses";
 const ShippingInfo = () => {
   const [showForm, setShowForm] = useState(false);
   const shippingInfo = useSelector((state) => state.shippingInfo.info);
-  console.log(shippingInfo);
   const dispatch = useDispatch();
   const {
     register,
@@ -41,11 +40,8 @@ const ShippingInfo = () => {
       moreInfo: "",
     },
   });
-  console.log("shippingInfo", shippingInfo?.length);
 
   const onSubmit = (data) => {
-    console.log(data);
-
     // Submit form data
     if (shippingInfo && shippingInfo.length > 0) {
       const newId = shippingInfo[0]?.id + 1;

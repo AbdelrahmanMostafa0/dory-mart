@@ -71,7 +71,6 @@ const ProductPagination = ({ curruntPage, totalProducts, limit }) => {
           </button>
 
           {/* Pages */}
-          {console.log(pages)}
 
           {[...new Set(pages)].map((page, i) => {
             if (page === "...") {

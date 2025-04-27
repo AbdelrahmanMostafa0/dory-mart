@@ -24,15 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
 const ProductCard = ({ product }) => {
   const cardRef = useRef(null);
   const { addToCart, loading } = useCart();
-  const notify = () => {
-    toast("Event has been created", {
-      description: "Sunday, December 03, 2023 at 9:00 AM",
-      action: {
-        label: "Undo",
-        onClick: () => console.log("Undo"),
-      },
-    });
-  };
+
   useGSAP(() => {
     gsap.fromTo(
       cardRef.current,
@@ -84,19 +76,7 @@ const ProductCard = ({ product }) => {
           <button
             onClick={() => {
               addToCart(product);
-              notify();
             }}
-            // onClick={
-            //   () => console.log("assdasdWS")
-
-            //   // toast("Event has been created", {
-            //   //   description: "Sunday, December 03, 2023 at 9:00 AM",
-            //   //   action: {
-            //   //     label: "Undo",
-            //   //     onClick: () => console.log("Undo"),
-            //   //   },
-            //   // })
-            // }
             className="relative flex items-center glassy-bg gap-2 min-w-36 justify-center min-h-[35px] text-sm border rounded-full px-4 text-white py-1 "
           >
             {loading ? (

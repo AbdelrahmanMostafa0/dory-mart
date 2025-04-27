@@ -9,18 +9,10 @@ import Image from "next/image";
 import { useMemo } from "react";
 
 const ImageGallery = ({ data }) => {
-  console.log(data.images);
-
   return (
-    <Carousel
-    // opts={{
-    //   loop: true,
-    // }}
-    >
+    <Carousel>
       <CarouselContent>
         {data?.images?.map((item, i) => {
-          console.log("item", item);
-
           return (
             <CarouselItem key={i}>
               <Image
