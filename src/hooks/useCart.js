@@ -37,17 +37,22 @@ const useCart = () => {
     dispatch(updateSaved(updatedSavedItems));
     localStorage.setItem("saved", JSON.stringify(updatedSavedItems));
   };
-  const addToCart = async (product) => {
+  const addToCart = async (product, num = 1) => {
     setLoading(true);
+
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const existProduct = storedCart.find((item) => item.id === product.id);
     const existinSavedItems = savedItems?.find(
       (item) => item.id === product.id
     );
+
     let updatedCart;
+
     if (existProduct) {
       updatedCart = storedCart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + num }
+          : item
       );
     } else {
       if (existinSavedItems) {
@@ -61,12 +66,14 @@ const useCart = () => {
           id: product?.id,
           description: product?.description,
           brand: product?.brand,
-          quantity: 1,
+          quantity: num, // هنا خليت الكمية = num مش 1 بس
         },
         ...storedCart,
       ];
     }
+
     await updateAllCart(updatedCart);
+
     dispatch(
       updateToast({
         title: "Product Added To Cart",
@@ -74,10 +81,12 @@ const useCart = () => {
         // undoAction: () => removeFromCart(product.id),
       })
     );
+
     setTimeout(() => {
       setLoading(false);
     }, 500);
   };
+
   const removeFromCart = (id) => {
     const filterdCart = cartInfo?.cart?.filter((item) => item.id !== id);
     updateAllCart(filterdCart);
