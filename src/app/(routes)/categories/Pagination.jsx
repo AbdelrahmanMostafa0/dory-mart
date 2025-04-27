@@ -11,7 +11,7 @@ import {
 
 const ProductPagination = ({ curruntPage, totalProducts, limit }) => {
   const totalPages = Math.ceil(totalProducts / limit);
-  const currentPage = parseInt(curruntPage); // Ensure curruntPage is an integer
+  const currentPage = parseInt(curruntPage, 10); // Ensure currentPage is an integer
 
   const isMobile =
     typeof window !== "undefined" ? window.innerWidth <= 768 : true;
@@ -47,6 +47,7 @@ const ProductPagination = ({ curruntPage, totalProducts, limit }) => {
     return range;
   };
 
+  // For desktop, show the page range
   const pages = !isMobile ? getPageRange() : [currentPage];
 
   if (totalPages > 1) {
@@ -62,12 +63,17 @@ const ProductPagination = ({ curruntPage, totalProducts, limit }) => {
               <div className="absolute w-full z-10 h-full"></div>
             )}
             <PaginationItem>
-              <PaginationPrevious href={`?page=${currentPage - 1}`} />
+              <PaginationPrevious
+                href={`?page=${currentPage - 1}`}
+                disabled={currentPage === 1}
+              />
             </PaginationItem>
           </button>
 
           {/* Pages */}
-          {pages.map((page, i) => {
+          {console.log(pages)}
+
+          {[...new Set(pages)].map((page, i) => {
             if (page === "...") {
               // Render ellipsis
               return (
@@ -98,7 +104,10 @@ const ProductPagination = ({ curruntPage, totalProducts, limit }) => {
               <div className="absolute w-full z-10 h-full"></div>
             )}
             <PaginationItem>
-              <PaginationNext href={`?page=${currentPage + 1}`} />
+              <PaginationNext
+                href={`?page=${currentPage + 1}`}
+                disabled={currentPage === totalPages}
+              />
             </PaginationItem>
           </button>
         </PaginationContent>
