@@ -9,6 +9,8 @@ import Image from "next/image";
 import { useMemo } from "react";
 
 const ImageGallery = ({ data }) => {
+  console.log(data.images);
+
   return (
     <Carousel
     // opts={{
@@ -17,14 +19,16 @@ const ImageGallery = ({ data }) => {
     >
       <CarouselContent>
         {data?.images?.map((item, i) => {
+          console.log("item", item);
+
           return (
             <CarouselItem key={i}>
               <Image
-                src={item}
+                src={item || "/no-img-placeholder.png"}
                 width={400}
                 height={400}
                 className="aspect-square w-full object-cover rounded-xl "
-                alt={` detail image number ${i} `}
+                alt={data?.title}
               />
             </CarouselItem>
           );
