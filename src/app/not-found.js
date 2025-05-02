@@ -15,7 +15,8 @@ const notFound = () => {
           className="max-w-[200px] sm:max-w-[300px] w-full mx-auto"
         />
         <h2 className="text-xl sm:text-3xl text-center text-black max-w-[600px]">
-          The page you're trying to access doesn't exist or has been removed.
+          The page {"you're"} trying to access {"doesn't "}exist or has been
+          removed.
         </h2>
         <Link
           href="/"
