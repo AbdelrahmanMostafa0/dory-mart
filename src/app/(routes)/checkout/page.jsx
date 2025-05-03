@@ -1,11 +1,14 @@
 import CheckoutPage from "@/components/checkout/CheckoutPage";
+import PageWrapper from "@/components/PageWrapper";
 import PageContainer from "@/components/ui/PageContainer";
 
 const page = () => {
   return (
-    <PageContainer>
-      <CheckoutPage />
-    </PageContainer>
+    <PageWrapper>
+      <PageContainer>
+        <CheckoutPage />
+      </PageContainer>
+    </PageWrapper>
   );
 };
 export default page;
