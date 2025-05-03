@@ -1,5 +1,6 @@
 import { getAllProducts } from "@/services/productService";
 import RenderProducts from "@/components/search/RenderProducts";
+import PageWrapper from "@/components/PageWrapper";
 
 const page = async ({ searchParams }) => {
   const queries = await searchParams;
@@ -11,9 +12,11 @@ const page = async ({ searchParams }) => {
   });
 
   return (
-    <div className="bg-gray-200">
-      <RenderProducts response={response} page={page} limit={15} />
-    </div>
+    <PageWrapper>
+      <div className="bg-gray-200">
+        <RenderProducts response={response} page={page} limit={15} />
+      </div>
+    </PageWrapper>
   );
 };
 export default page;

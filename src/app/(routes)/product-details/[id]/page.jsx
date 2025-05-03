@@ -1,6 +1,7 @@
 import { getSingleProduct } from "@/services/productService";
 import PageContainer from "@/components/ui/PageContainer";
 import ProductDetails from "@/components/product-details/ProductDetails";
+import PageWrapper from "@/components/PageWrapper";
 
 export async function generateMetadata({ params }) {
   const { id } = params;
@@ -26,9 +27,11 @@ const page = async ({ params }) => {
   const data = await getSingleProduct({ id });
 
   return (
-    <PageContainer>
-      <ProductDetails data={data} />
-    </PageContainer>
+    <PageWrapper>
+      <PageContainer>
+        <ProductDetails data={data} />
+      </PageContainer>
+    </PageWrapper>
   );
 };
 export default page;
