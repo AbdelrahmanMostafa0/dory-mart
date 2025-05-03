@@ -10,6 +10,7 @@ const playSound = () => {
   audio.play();
 };
 export default function PageWrapper({ children }) {
+  const audioElementRef = useRef(null);
   const containerRef = useRef(null);
   const bubblesRef = useRef([]);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -37,8 +38,8 @@ export default function PageWrapper({ children }) {
     // Animate bubbles
     bubblesRef.current.forEach((bubble) => {
       const delay = Math.random() * 1.5;
-      const x = Math.random() * window.innerWidth;
       const size = 20 + Math.random() * 200;
+      const x = Math.random() * (window.innerWidth - size);
 
       gsap.set(bubble, {
         display: "block",
@@ -57,11 +58,19 @@ export default function PageWrapper({ children }) {
         delay,
       });
     });
-    playSound();
+    // playSound();
+    audioElementRef.current.play();
   }, []);
 
   return (
     <>
+      <audio
+        preload="auto"
+        ref={audioElementRef}
+        src="/audio/bubble-sound.mp3"
+        className="hidden"
+      />
+
       {isAnimating && (
         <div
           ref={containerRef}
