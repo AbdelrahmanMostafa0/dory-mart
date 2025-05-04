@@ -4,7 +4,7 @@ import ProductDetails from "@/components/product-details/ProductDetails";
 import PageWrapper from "@/components/PageWrapper";
 
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const product = await getSingleProduct({ id });
 
   return {
