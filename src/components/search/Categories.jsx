@@ -21,8 +21,8 @@ const Categories = ({ categories, curruntCat }) => {
                 <Link
                   href={`/categories/${category.slug}`}
                   key={category.slug}
-                  className={` rounded-full px-4 py-1 whitespace-nowrap ${
-                    isSelected ? "bg-blue-300" : "bg-white"
+                  className={` rounded-full px-4 py-1 whitespace-nowrap text-sm ${
+                    isSelected ? "bg-blue-400  text-gray-200" : "bg-white"
                   }`}
                 >
                   {category.name}
@@ -35,8 +35,8 @@ const Categories = ({ categories, curruntCat }) => {
                 <Link
                   href={`/categories/${category.slug}`}
                   key={category.slug}
-                  className={` rounded-full px-4 py-1 whitespace-nowrap ${
-                    isSelected ? "bg-blue-300" : "bg-white"
+                  className={` rounded-full px-4 py-1 whitespace-nowrap text-sm ${
+                    isSelected ? "bg-blue-400  text-gray-200" : "bg-white"
                   }`}
                 >
                   {category.name}

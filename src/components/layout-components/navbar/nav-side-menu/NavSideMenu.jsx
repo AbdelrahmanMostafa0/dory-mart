@@ -1,83 +1,84 @@
 "use client";
+
 import { RiMenuFill } from "react-icons/ri";
 import { FaCartShopping, FaChevronRight, FaHeart } from "react-icons/fa6";
 import { MdLanguage } from "react-icons/md";
-
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-// import { Button } from "../ui/button";
 
 const NavSideMenu = () => {
   const productsCat = useSelector(
     (state) => state.ProductsCategories.categories
   );
+
   return (
     <Sheet>
-      <SheetTrigger>
-        {" "}
-        <div className="sm:hidden">
-          <RiMenuFill className="text-xl text-white" />
-        </div>
+      <SheetTrigger asChild>
+        <button aria-label="Open menu" className="sm:hidden p-2 text-white">
+          <RiMenuFill className="text-2xl" />
+        </button>
       </SheetTrigger>
+
       <SheetContent>
-        <SheetHeader>
-          <SheetTitle className="text-lg font-bold text-start">Menu</SheetTitle>
-          <div className="size-full   overflow-y-auto">
-            <div className="h-dvh max-h-[83dvh] space-y-4">
-              <div className="grid grid-cols-2 gap-2">
-                <SheetClose className="w-full">
-                  <div className="w-full min-h-20 py-6 bg-white border drop-shadow-md rounded-md flex flex-col  items-center justify-center">
-                    <FaCartShopping className=" text-xl" />
-                    <p className="text-center font-semibold ">Cart</p>
-                  </div>
-                </SheetClose>
-                <div className="w-full min-h-20 py-6 bg-white border drop-shadow-md rounded-md flex flex-col  items-center justify-center">
-                  {" "}
-                  <FaHeart className=" text-xl" />
-                  <p className="text-center font-semibold ">Favorite</p>
-                </div>
-                {/* <div className="w-full h-20 bg-white border drop-shadow-md rounded-md"></div> */}
-              </div>
-              <div className="w-full text-start space-y-3">
-                <p className="font-semibold">Categories</p>
-                <div className="space-y-2">
-                  {productsCat &&
-                    productsCat?.slice(1, 12)?.map((cat) => {
-                      return (
-                        <Link href={`/categories/${cat.slug}`} key={cat.slug}>
-                          <SheetClose className="w-full flex items-center justify-between">
-                            <span>{cat.name}</span>
-                            <FaChevronRight />
-                          </SheetClose>
-                        </Link>
-                      );
-                    })}
-                </div>
-              </div>
+        <div className="h-[calc(100vh-5rem)] overflow-y-auto flex flex-col justify-between mt-5">
+          <div className="space-y-6">
+            {/* Top Buttons */}
+            <div className="grid grid-cols-2 gap-3">
+              <SheetClose asChild>
+                <Link
+                  href={"/cart"}
+                  className="w-full min-h-20 py-6 bg-blue-100 hover:bg-blue-200 border-2 border-blue-300 rounded-2xl shadow-md transition-all duration-200 flex flex-col items-center justify-center"
+                >
+                  <FaCartShopping className="text-2xl text-blue-700 mb-1" />
+                  <span className="font-bold text-blue-800">Cart</span>
+                </Link>
+              </SheetClose>
+
+              <button className="w-full min-h-20 py-6 bg-pink-100 hover:bg-pink-200 border-2 border-pink-300 rounded-2xl shadow-md transition-all duration-200 flex flex-col items-center justify-center">
+                <FaHeart className="text-2xl text-pink-600 mb-1" />
+                <span className="font-bold text-pink-700">Favorite</span>
+              </button>
+            </div>
+
+            {/* Categories */}
+            <div className="space-y-3">
+              <p className="font-semibold text-base">Categories</p>
+              <ul className="space-y-2">
+                {productsCat?.slice(1, 12).map((cat) => (
+                  <li key={cat.slug}>
+                    <Link href={`/categories/${cat.slug}`} passHref>
+                      <SheetClose asChild>
+                        <button className="w-full flex items-center justify-between py-2 px-3 bg-gray-100 rounded-md hover:bg-gray-200 transition">
+                          <span>{cat.name}</span>
+                          <FaChevronRight className="text-sm" />
+                        </button>
+                      </SheetClose>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <button className="flex items-center gap-2">
-              <MdLanguage />
+
+          {/* Language Switcher */}
+          {/* <div className="pt-6 border-t mt-4 flex items-center justify-center">
+            <button className="flex items-center gap-2 text-sm font-medium hover:underline">
+              <MdLanguage className="text-xl" />
               <span>عربى</span>
             </button>
-          </div>
-          {/* <SheetDescription>
-          This action cannot be undone. This will permanently delete
-          your account and remove your data from our servers.
-        </SheetDescription> */}
-        </SheetHeader>
+          </div> */}
+        </div>
       </SheetContent>
     </Sheet>
   );
 };
+
 export default NavSideMenu;

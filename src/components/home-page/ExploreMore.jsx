@@ -3,7 +3,7 @@ import AnimatedTitle from "../ui/AnimatedTitle";
 
 const ExploreMore = () => {
   return (
-    <div className=" py-5 sm:py-20   flex items-center flex-col justify-center w-full mx-auto relative max-w-screen">
+    <div className=" pt-5 sm:py-20   flex items-center flex-col justify-center w-full mx-auto relative max-w-screen">
       <h3 className="text-center font-zentry text-4xl md:text-8xl font-bold">
         Explore the Depths of <br />{" "}
         <span
