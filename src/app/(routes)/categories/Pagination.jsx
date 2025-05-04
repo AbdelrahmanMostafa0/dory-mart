@@ -9,7 +9,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const ProductPagination = ({ curruntPage, totalProducts, limit }) => {
+const ProductPagination = ({ curruntPage = 1, totalProducts, limit }) => {
   const totalPages = Math.ceil(totalProducts / limit);
   const currentPage = parseInt(curruntPage, 10); // Ensure currentPage is an integer
 

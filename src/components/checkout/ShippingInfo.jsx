@@ -1,9 +1,9 @@
 /*
 // todo: cancel add address
-todo: checkout card 
-todo: checkout card logic
-todo: page logic if no data
-todo: checkout page skeleton
+// todo: checkout card 
+// todo: checkout card logic
+// todo: page logic if no data
+// todo: checkout page skeleton
 */
 "use client";
 import PhoneNumberInput from "@/shared/PhoneNumberInput";
@@ -12,13 +12,14 @@ import Input from "../ui/Input";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateShippingInfo } from "@/store/features/shippingInfoSlice";
-import { MdDelete } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
 import UserAdresses from "./UserAdresses";
+
 const ShippingInfo = () => {
   const [showForm, setShowForm] = useState(false);
   const shippingInfo = useSelector((state) => state.shippingInfo.info);
   const dispatch = useDispatch();
+  console.log(shippingInfo);
+
   const {
     register,
     setValue,
@@ -41,64 +42,56 @@ const ShippingInfo = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    // Submit form data
-    if (shippingInfo && shippingInfo.length > 0) {
-      const newId = shippingInfo[0]?.id + 1;
-
-      const newItem = { id: newId, ...data, selected: true };
-      const newShippingInfo = shippingInfo.map((item) => {
-        return { ...item, selected: false };
-      });
-      const updatedShippingInfo = [newItem, ...newShippingInfo];
-      dispatch(updateShippingInfo(updatedShippingInfo));
-      localStorage.setItem("shippingInfo", JSON.stringify(updatedShippingInfo));
-    } else {
-      const newItem = { id: 1, ...data, selected: true };
-      dispatch(updateShippingInfo([newItem]));
-      localStorage.setItem("shippingInfo", JSON.stringify([newItem]));
-    }
-    reset();
-    setShowForm(false);
-    clearErrors();
-  };
-
   useEffect(() => {
-    if (shippingInfo && shippingInfo.length > 0) {
-      setShowForm(false);
-    } else {
-      setShowForm(true);
+    const savedInfo = JSON.parse(localStorage.getItem("shippingInfo")) || [];
+    dispatch(updateShippingInfo(savedInfo));
+    setShowForm(savedInfo.length === 0);
+  }, [dispatch]);
+
+  const onSubmit = (data) => {
+    const newId = shippingInfo.length > 0 ? shippingInfo[0].id + 1 : 1;
+    const newItem = { id: newId, ...data, selected: true };
+
+    const updatedShippingInfo = [
+      newItem,
+      ...shippingInfo.map((item) => ({ ...item, selected: false })),
+    ];
+
+    dispatch(updateShippingInfo(updatedShippingInfo));
+    localStorage.setItem("shippingInfo", JSON.stringify(updatedShippingInfo));
+    reset();
+    clearErrors();
+    setShowForm(false);
+  };
+  useEffect(() => {
+    if (shippingInfo) {
+      if (shippingInfo.length < 1) {
+        setShowForm(true);
+      }
     }
   }, [shippingInfo]);
-  useEffect(() => {
-    const shippingInfo = JSON.parse(localStorage.getItem("shippingInfo"));
-    if (shippingInfo) {
-      dispatch(updateShippingInfo(shippingInfo));
-    } else {
-      dispatch(updateShippingInfo([]));
-    }
-  }, []);
   return (
-    <div className="w-full  space-y-4">
+    <div className="w-full space-y-4">
       <h2 className="text-4xl font-bold">Shipping Information</h2>
       <UserAdresses />
-      {showForm && (
+
+      {showForm ? (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid lg:grid-cols-2   gap-x-4 gap-y-6 "
+          className="grid lg:grid-cols-2 gap-x-4 gap-y-6"
         >
           <div className="space-y-2 lg:col-span-2">
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <label htmlFor="email" className="text-lg">
                 Email
               </label>
-              {shippingInfo && shippingInfo?.length > 0 && (
+              {shippingInfo.length > 0 && (
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="text-red-500"
+                  className="text-sm text-red-600 hover:underline"
                 >
-                  cancel
+                  Cancel
                 </button>
               )}
             </div>
@@ -109,6 +102,7 @@ const ShippingInfo = () => {
               placeholder="Enter your email"
             />
           </div>
+
           <div className="space-y-2">
             <label htmlFor="fname" className="text-lg">
               First Name
@@ -117,23 +111,25 @@ const ShippingInfo = () => {
               error={errors.fname}
               type="text"
               {...register("fname", { required: "First Name is required" })}
-              placeholder="Enter your name"
+              placeholder="Enter your first name"
             />
           </div>
+
           <div className="space-y-2">
-            <label htmlFor="name" className="text-lg">
+            <label htmlFor="lname" className="text-lg">
               Last Name
             </label>
             <Input
               error={errors.lname}
               type="text"
               {...register("lname", { required: "Last Name is required" })}
-              placeholder="Enter your name"
+              placeholder="Enter your last name"
             />
           </div>
+
           <div className="space-y-2 lg:col-span-2">
             <label htmlFor="address" className="text-lg">
-              Address in details
+              Address Details
             </label>
             <Input
               error={errors.address}
@@ -142,9 +138,10 @@ const ShippingInfo = () => {
               placeholder="Enter your address"
             />
           </div>
+
           <div className="space-y-2">
-            <label htmlFor="apartment" className="text-lg line-clamp-1">
-              Apartment/Building Number
+            <label htmlFor="apartment" className="text-lg">
+              Apartment / Building
             </label>
             <Input
               error={errors.apartment}
@@ -152,8 +149,7 @@ const ShippingInfo = () => {
               {...register("apartment", {
                 required: "Apartment/Building Number is required",
               })}
-              placeholder="e.g., Apartment 5B, Building 12"
-              className="w-full  h-[50px] bg-white border focus:border-blue-500 outline-none px-3 rounded-md my-0 "
+              placeholder="e.g., Apt 5B, Building 12"
             />
           </div>
 
@@ -166,9 +162,9 @@ const ShippingInfo = () => {
               type="text"
               {...register("city", { required: "City is required" })}
               placeholder="Enter your city"
-              className="w-full  h-[50px] bg-white border focus:border-blue-500 outline-none px-3 rounded-md my-0 "
             />
           </div>
+
           <div className="space-y-2 lg:col-span-2">
             <label htmlFor="phone" className="text-lg">
               Phone
@@ -181,32 +177,32 @@ const ShippingInfo = () => {
               watch={watch}
             />
           </div>
+
           <div className="space-y-2 lg:col-span-2">
             <label htmlFor="moreInfo" className="text-lg">
               Additional Information
             </label>
             <textarea
-              name="moreInfo"
               {...register("moreInfo")}
-              placeholder="Add delivery instructions or special requests"
-              className="w-full  h-[200px] resize-none bg-white border focus:border-blue-500 outline-none p-3 rounded-md my-0 "
+              placeholder="Delivery notes or special requests"
+              className="w-full h-[200px] resize-none bg-white border px-3 py-2 rounded-md focus:border-blue-500 outline-none"
             ></textarea>
-            <button className="w-full text-center p-3 rounded-md bg-blue-500 hover:bg-blue-400 duration-150 text-white">
-              {" "}
+
+            <button
+              type="submit"
+              className="mt-3 w-full py-3 rounded-md bg-blue-600 hover:bg-blue-500 text-white text-center"
+            >
               Add Address
             </button>
           </div>
         </form>
-      )}
-      {!showForm && (
-        <div className="flex items-center gap-x-4">
-          <button
-            onClick={() => setShowForm(true)}
-            className="w-full text-center p-3 rounded-md bg-blue-500 hover:bg-blue-400 duration-150 text-white"
-          >
-            Add New Address
-          </button>
-        </div>
+      ) : (
+        <button
+          onClick={() => setShowForm(true)}
+          className="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-500 text-white text-center"
+        >
+          Add New Address
+        </button>
       )}
     </div>
   );

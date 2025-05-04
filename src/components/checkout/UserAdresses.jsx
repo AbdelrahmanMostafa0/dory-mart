@@ -1,92 +1,93 @@
+import { useDispatch, useSelector } from "react-redux";
 import { updateShippingInfo } from "@/store/features/shippingInfoSlice";
 import { FaCheckCircle, FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
 
-const UserAdresses = () => {
+const UserAddresses = () => {
   const shippingInfo = useSelector((state) => state.shippingInfo.info);
   const dispatch = useDispatch();
-  const deleteAddress = (id) => {
-  
-    const itemIndex = shippingInfo.findIndex((item) => item.id === id);
-    if (itemIndex === -1) return; 
-  
-    let updatedShippingInfo = shippingInfo.filter((_, i) => i !== itemIndex); 
-    if (updatedShippingInfo.length > 0) {
-      // If the deleted address was selected, pick a new selected one
-      const wasSelected = shippingInfo[itemIndex].selected;
-      if (wasSelected) {
-        const newSelectedIndex = itemIndex > 0 ? itemIndex - 1 : 0; // Pick previous or first one
-        updatedShippingInfo = updatedShippingInfo.map((item, i) => ({
-          ...item,
-          selected: i === newSelectedIndex,
-        }));
-      }
-    }
-  
-    dispatch(updateShippingInfo(updatedShippingInfo));
-    localStorage.setItem("shippingInfo", JSON.stringify(updatedShippingInfo));
-  };
+
   const selectAddress = (id) => {
-    const newShippingInfo = shippingInfo.map((item) => {
-      if (item.id === id) {
-        return { ...item, selected: true };
-      }
-      return { ...item, selected: false };
-    });
-    dispatch(updateShippingInfo(newShippingInfo));
-    localStorage.setItem("shippingInfo", JSON.stringify(newShippingInfo));
+    const updated = shippingInfo.map((item) => ({
+      ...item,
+      selected: item.id === id,
+    }));
+    dispatch(updateShippingInfo(updated));
+    localStorage.setItem("shippingInfo", JSON.stringify(updated));
   };
+
+  const deleteAddress = (id) => {
+    const index = shippingInfo.findIndex((item) => item.id === id);
+    if (index === -1) return;
+
+    const isSelected = shippingInfo[index].selected;
+    let updated = shippingInfo.filter((_, i) => i !== index);
+
+    if (isSelected && updated.length > 0) {
+      const fallbackIndex = index > 0 ? index - 1 : 0;
+      updated = updated.map((item, i) => ({
+        ...item,
+        selected: i === fallbackIndex,
+      }));
+    }
+
+    dispatch(updateShippingInfo(updated));
+    localStorage.setItem("shippingInfo", JSON.stringify(updated));
+  };
+
+  if (!shippingInfo?.length) return null;
+
   return (
-    <>
-      {shippingInfo && shippingInfo.length > 0 && (
-        <div className="space-y-4">
-          {shippingInfo.map((item, index) => {
-            const isSelected = item?.selected;
-            return (
-              <div
-                className={`flex gap-2 p-4 items-start border rounded  drop-shadow-md overflow-hidden relative ${
-                  isSelected ? "border-blue-500 bg-blue-500/10" : "bg-white"
-                }`}
-                key={index}
-              >
-                <div className="flex items-center top-3 absolute right-3 gap-1">
-                  <button
-                    onClick={() => deleteAddress(item.id)}
-                    className="  text-primary hover:text-red-500 duration-150"
-                  >
-                    <MdDelete />
-                  </button>
-                  <button className="  text-primary hover:text-blue-500 duration-150">
-                    <FaRegEdit />
-                  </button>
-                </div>
-                <button
-                  onClick={() => selectAddress(item.id)}
-                  className={`w-5 h-5 border-2 rounded-full flex items-center justify-center ${
-                    isSelected && "border-blue-500 "
-                  }`}
-                >
-                  {isSelected && (
-                    <FaCheckCircle className="text-blue-500 text-xl" />
-                  )}
-                </button>
-                <div className="space-y-2 w-full ">
-                  {" "}
-                  <p>Email: {item.email}</p>
-                  <p>
-                    Name: {item.fname} {item.lname}
-                  </p>
-                  <p className="line-clamp-1">
-                    Address: {item.address}, {item.apartment}, {item.city}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+    <div className="space-y-4">
+      {shippingInfo.map((item) => (
+        <div
+          key={item.id}
+          className={`relative flex gap-2 p-4 items-start border rounded shadow-sm overflow-hidden transition-colors ${
+            item.selected ? "border-blue-500 bg-blue-100/50" : "bg-white"
+          }`}
+        >
+          {/* Actions */}
+          <div className="absolute top-3 right-3 flex gap-1">
+            <button
+              onClick={() => deleteAddress(item.id)}
+              title="Delete"
+              className="text-gray-600 hover:text-red-500 transition"
+            >
+              <MdDelete />
+            </button>
+          </div>
+
+          {/* Selection */}
+          <button
+            onClick={() => selectAddress(item.id)}
+            title={item.selected ? "Selected" : "Select Address"}
+            className={`w-5 h-5 mt-1 border-2 rounded-full flex items-center justify-center ${
+              item.selected ? "border-blue-500" : "border-gray-400"
+            }`}
+          >
+            {item.selected && (
+              <FaCheckCircle className="text-blue-500 text-lg" />
+            )}
+          </button>
+
+          {/* Address Info */}
+          <div className="space-y-1 text-sm w-full">
+            <p>
+              <span className="font-medium">Email:</span> {item.email}
+            </p>
+            <p>
+              <span className="font-medium">Name:</span> {item.fname}{" "}
+              {item.lname}
+            </p>
+            <p className="truncate">
+              <span className="font-medium">Address:</span> {item.address},{" "}
+              {item.apartment}, {item.city}
+            </p>
+          </div>
         </div>
-      )}
-    </>
+      ))}
+    </div>
   );
 };
-export default UserAdresses;
+
+export default UserAddresses;

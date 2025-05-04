@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
             height={1000}
             alt={product.title}
             src={product.thumbnail}
-            className="w-full h-[300px] bg-gray-100 obje mb-2 rounded-lg object-cover"
+            className="w-full h-[300px] md:bg-transparent bg-gray-100 mb-2 rounded-lg object-cover"
           />
         </Link>
         <CardTitle className="mt-2 line-clamp-1">
@@ -74,20 +74,21 @@ const ProductCard = ({ product }) => {
           {" "}
           <p>${product.price}</p>
           <button
-            onClick={() => {
-              addToCart(product);
-            }}
-            className="relative flex items-center glassy-bg gap-2 min-w-36 justify-center min-h-[35px] text-sm border rounded-full px-4 text-white py-1 "
+            onClick={() => addToCart(product)}
+            className="group relative flex items-center justify-center gap-2 px-5 py-2 min-w-32 rounded-full border text-[#2a9df4] border-[#2a9df4]  overflow-hidden  text-sm font-medium transition-all duration-300  active:scale-95"
           >
             {loading ? (
-              <FaSpinner className="animate-spin" />
+              <FaSpinner className="animate-spin group-hover:text-white z-10 h-5" />
             ) : (
-              <>
-                <ShoppingCart width={20} />
-
-                <span>Add to cart</span>
-              </>
+              <div className="flex items-center gap-2 group-hover:text-white z-10 transition-all duration-300">
+                <ShoppingCart
+                  className="transition-transform duration-300 group-hover:scale-110"
+                  size={18}
+                />
+                <span>Add</span>
+              </div>
             )}
+            <div className="w-44 h-44 bg-[#2a9df4] absolute inset-0 top-11 rounded-full group-hover:-top-10 -left-8 duration-300"></div>
           </button>
         </div>
       </CardContent>
