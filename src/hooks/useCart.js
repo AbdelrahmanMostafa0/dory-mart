@@ -26,6 +26,11 @@ const useCart = () => {
     );
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
+
+  const emptyCart = () => {
+    dispatch(updateCart([]));
+    localStorage.setItem("cart", JSON.stringify([]));
+  };
   const updateSavedItems = (item) => {
     const existProduct = savedItems?.find((product) => product.id === item.id);
     if (existProduct) {
@@ -130,6 +135,7 @@ const useCart = () => {
     increseQuantity,
     decreseQuantity,
     saveForLater,
+    emptyCart,
     loading,
   };
 };

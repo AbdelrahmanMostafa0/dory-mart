@@ -5,8 +5,10 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import useCart from "@/hooks/useCart";
 
 const CheckoutPage = () => {
+  const { emptyCart } = useCart();
   const router = useRouter();
   const shippingInfo = useSelector((state) => state.shippingInfo.info);
   const [cartItems, setCartItems] = useState([]);
@@ -21,8 +23,9 @@ const CheckoutPage = () => {
 
   const handleCheckout = () => {
     router.push("/checkout/success");
+    emptyCart();
   };
-  console.log(cartInfo);
+  // console.log(cartInfo);
 
   return (
     <div className="space-y-6">

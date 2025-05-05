@@ -12,6 +12,16 @@ export default {
       padding: "10px",
     },
     extend: {
+      animation: {
+        spinSlow: "spin 20s linear infinite",
+        float: "float 6s ease-in-out infinite",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+      },
       fontFamily: {
         "lilita-one": ["Lilita One", "sans-serif"],
         impact: ["impact", "sans-serif"],
