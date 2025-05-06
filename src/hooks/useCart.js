@@ -29,6 +29,8 @@ const useCart = () => {
 
   const emptyCart = () => {
     dispatch(updateCart([]));
+    dispatch(updateQuantity(0));
+    dispatch(updatePrice(0));
     localStorage.setItem("cart", JSON.stringify([]));
   };
   const updateSavedItems = (item) => {
