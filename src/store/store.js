@@ -4,6 +4,8 @@ import cartReducer from "@/store/features/cartSlice";
 import savedItemsReducer from "@/store/features/savedItemsSlice";
 import toastReducer from "@/store/features/toastSlice";
 import shoppingInfoReducer from "@/store/features/shippingInfoSlice";
+import favoritesReducer from "./favoritesSlice";
+
 export const store = configureStore({
   reducer: {
     ProductsCategories: ProductsCategoriesReducer,
@@ -11,5 +13,6 @@ export const store = configureStore({
     savedForLater: savedItemsReducer,
     toast: toastReducer,
     shippingInfo: shoppingInfoReducer,
+    favorites: favoritesReducer,
   },
 });

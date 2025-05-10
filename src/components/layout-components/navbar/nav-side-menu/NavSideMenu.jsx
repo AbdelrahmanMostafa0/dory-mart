@@ -41,11 +41,15 @@ const NavSideMenu = () => {
                   <span className="font-bold text-blue-800">Cart</span>
                 </Link>
               </SheetClose>
-
-              <button className="w-full min-h-20 py-6 bg-pink-100 hover:bg-pink-200 border-2 border-pink-300 rounded-2xl shadow-md transition-all duration-200 flex flex-col items-center justify-center">
-                <FaHeart className="text-2xl text-pink-600 mb-1" />
-                <span className="font-bold text-pink-700">Favorite</span>
-              </button>
+              <SheetClose asChild>
+                <Link
+                  href={"favorites"}
+                  className="w-full min-h-20 py-6 bg-pink-100 hover:bg-pink-200 border-2 border-pink-300 rounded-2xl shadow-md transition-all duration-200 flex flex-col items-center justify-center"
+                >
+                  <FaHeart className="text-2xl text-pink-600 mb-1" />
+                  <span className="font-bold text-pink-700">Favorite</span>
+                </Link>
+              </SheetClose>
             </div>
 
             {/* Categories */}

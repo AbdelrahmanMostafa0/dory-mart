@@ -7,6 +7,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import useCart from "@/hooks/useCart";
+import useFav from "@/hooks/useFav";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,6 +15,7 @@ import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FaSpinner } from "react-icons/fa6";
 import { toast } from "sonner";
 // import { toast } from "sonner";
@@ -22,6 +24,8 @@ toast;
 gsap.registerPlugin(ScrollTrigger);
 
 const ProductCard = ({ product }) => {
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFav();
+  const isFavorited = isFavorite(product?.id);
   const cardRef = useRef(null);
   const { addToCart, loading } = useCart();
 
@@ -47,9 +51,25 @@ const ProductCard = ({ product }) => {
       }
     );
   }, []);
-
+  const handleFavoriteToggle = () => {
+    if (isFavorited) {
+      removeFromFavorites(product);
+    } else {
+      addToFavorites(product);
+    }
+  };
   return (
-    <Card ref={cardRef} className="prod-card h-fit">
+    <Card ref={cardRef} className="prod-card h-fit relative">
+      <button
+        onClick={handleFavoriteToggle}
+        className="absolute md:top-5 md:right-5 top-8 right-8 z-10 text-3xl"
+      >
+        {isFavorited ? (
+          <AiFillHeart className=" transition-all duration-200 text-red-500" />
+        ) : (
+          <AiOutlineHeart className=" transition-all text-gray-500 hover:text-red-500 duration-200" />
+        )}
+      </button>
       <CardHeader>
         <Link href={`/product-details/${product.id}`}>
           <Image
