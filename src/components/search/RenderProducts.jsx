@@ -13,7 +13,7 @@ const RenderProducts = async ({
 }) => {
   return (
     <PageContainer className={"space-y-4 mb-0"}>
-      <ProductFilters curruntCat={category} />
+      {/* <ProductFilters curruntCat={category} /> */}
       <SearchCat curruntCat={category} />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-5 min-h-[80dvh]">
         {response?.products &&
